@@ -1,3 +1,10 @@
+# Anggota Kelompok :
+1. Noviyanto Putra Ramadhan
+2. Shofiyah
+3. Tasya Nurul Laily
+4. Hamni Kamal Rahmatika
+5. Winaldi Ken Aulia
+
 # Laravel AdminLTE
 
 This is a ready to use AdminLTE template for Laravel 5.8

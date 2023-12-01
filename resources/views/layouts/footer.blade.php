@@ -1,10 +1,6 @@
-<!-- Main Footer -->
-<footer class="main-footer">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-        {{-- Anything you want --}}
+<footer class="footer">
+    <div class="container-fluid d-flex justify-content-between">
+      <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright © Kelompok 3</span>
+      <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Dashboard {{ Str::upper(Auth::user()->name) }} Sistem Manajemen Restoran</span>
     </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; {{date('Y')}} <a href="{{route('dashboard')}}">{{config('app.name')}}</a>.</strong> All rights
-    reserved.
-</footer>
+  </footer>

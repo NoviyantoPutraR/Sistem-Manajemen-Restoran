@@ -1,4 +1,5 @@
 # Anggota Kelompok :
+
 1. Noviyanto Putra Ramadhan
 2. Shofiyah
 3. Tasya Nurul Laily
@@ -31,9 +32,9 @@ This is a ready to use AdminLTE template for Laravel 5.8
 
 You can clone this repository & rename it to your project
 
-````
+```
 git clone https://github.com/rpahlevy/laravel-adminlte3 your-project-name
-````
+```
 
 #### Without Git
 
@@ -44,9 +45,9 @@ Extract it and rename to your project name
 
 Change composer.json to your liking first (detail of your project). Make sure you have composer installed, then cd to the project folder and do the following
 
-````
+```
 composer install
-````
+```
 
 ### 3. Setup .env
 
@@ -54,24 +55,24 @@ Clone .env.example or just rename it to .env then fill in the details & don't fo
 
 Then generate app key by running:
 
-````
+```
 php artisan key:generate
-````
+```
 
 ### 4. Migrate DB
 
 If your web needs Auth (who don't?) migrate the default DB from Laravel. Still on the project, run:
 
-````
+```
 php artisan migrate
-````
+```
 
 ### 5. Serve Your Web
 
 Serve locally using php built in and visit localhost:8000/starter
 
-````
+```
 php artisan serve
-````
+```
 
 To get into the dashboard go to /register first.

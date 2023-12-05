@@ -31,6 +31,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 Route::get('/admin/pembelian', 'PembelianController@index')->name('daftarPembelian');
+Route::get('/admin/pembelian/add', 'PembelianController@create')->name('addPembelian');
+Route::post('/admin/pembelian/add', 'PembelianController@store')->name('storePembelian');
 
 
 Route::middleware(['auth', 'manager'])->group(function () {

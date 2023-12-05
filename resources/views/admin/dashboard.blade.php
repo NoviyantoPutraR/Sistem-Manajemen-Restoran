@@ -10,7 +10,7 @@
                 >
                   <i class="mdi mdi-home"></i>
                 </span>
-                Dashboard {{ Str::upper(Auth::user()->name) }}
+                Dashboard {{ Str::upper(Auth::user()->role) }}
               </h3>
               <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">

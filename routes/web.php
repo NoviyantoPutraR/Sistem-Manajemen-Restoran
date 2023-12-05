@@ -30,6 +30,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     })->name('adminDashboard');
 });
 
+Route::get('/admin/pembelian', 'PembelianController@index')->name('daftarPembelian');
+
 
 Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/manager/dashboard', function () {

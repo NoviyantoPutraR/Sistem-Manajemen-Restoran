@@ -31,12 +31,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 Route::get('/admin/pembelian', 'PembelianController@index')->name('daftarPembelian');
-<<<<<<< HEAD
+
 Route::get('/admin/user', 'UserController@index')->name('daftarUser');
-=======
+
 Route::get('/admin/pembelian/add', 'PembelianController@create')->name('addPembelian');
 Route::post('/admin/pembelian/add', 'PembelianController@store')->name('storePembelian');
->>>>>>> 866649b622a205ab1192e57190ce732c4361bb24
+
 
 
 Route::middleware(['auth', 'manager'])->group(function () {

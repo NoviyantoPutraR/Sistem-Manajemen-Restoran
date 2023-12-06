@@ -1,4 +1,4 @@
-@extends('auth.master')
+<!-- @extends('auth.master')
 
 @section('content')
 <div class="card">
@@ -84,4 +84,4 @@
     </div>
     <!-- /.login-card-body -->
 </div>
-@endsection
+@endsection -->

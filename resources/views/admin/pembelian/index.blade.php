@@ -48,7 +48,7 @@
                                                 <td>{{ $loop->index + 1 }}</td>
                                                 <td>{{ $tbl_pembelian->kategori }}</td>
                                                 <td>{{ $tbl_pembelian->total }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($tbl_pembelian->waktu)->format('Y-m-d H:i:s') }}
+                                                <td>{{ \Carbon\Carbon::parse($tbl_pembelian->created_at)->format('Y-m-d H:i:s') }}
                                                 </td>
                                                 <td>
                                                     <a href="#" class="btn btn-gradient-warning btn-sm"

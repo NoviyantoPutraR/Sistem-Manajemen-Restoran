@@ -36,20 +36,15 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'kategori' => 'required', // Sesuaikan dengan nama atribut yang sesuai
-            'total' => 'required|int',
-        ]);
+        $validatedData = validator($request->all(), [
+            'kategori' => 'required',
+            'total' => 'required',
+        ])->validate();
 
-        // Simpan data ke dalam database
-        PembelianController::create([
-            'kategori' => $request->kategori,
-            'total' => $request->total,
-            // Sesuaikan dengan kolom-kolom yang sesuai dalam model dan database Anda
-        ]);
+        $tbl_pembelians = new PembelianModel($validatedData);
+        $tbl_pembelians->save();
 
-        // Setelah menyimpan, alihkan pengguna atau lakukan tindakan lain yang sesuai
-        return redirect()->route('daftarPembelian')->with('success', 'Pembelian berhasil disimpan.');
+        return redirect(route('daftarPembelian'))->with('success', 'Data Berhasil Disimpan');
     }
 
     /**

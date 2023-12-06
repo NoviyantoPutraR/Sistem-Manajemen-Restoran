@@ -10,8 +10,8 @@
             var hargaPerItem = getHargaPerItem(kategori); // Ganti dengan fungsi atau nilai harga per item yang sesuai
             var totalNominal = totalItem * hargaPerItem;
 
-            // Format totalNominal ke dalam format rupiah
-            var formattedNominal = formatRupiah(totalNominal, 'Rp ');
+            // Format totalNominal ke dalam format rupiah tanpa tanda pemisah ribuan
+            var formattedNominal = totalNominal;
 
             document.getElementById('txtTotalNominal').value = formattedNominal;
         }
@@ -42,7 +42,7 @@
             }
 
             rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
-            return prefix === undefined ? rupiah : rupiah ? 'Rp ' + rupiah : '';
+            return prefix === undefined ? rupiah : rupiah ? +rupiah : '';
         }
     </script>
 @endsection
@@ -101,11 +101,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="txtTotalNominal">TOTAL NOMINAL</label>
+                                    <label for="txtTotalNominal">TOTAL NOMINAL (Rp)</label>
                                     <input name="total" type="int" class="form-control" id="txtTotalNominal" readonly>
                                 </div>
 
-                                <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                                <button type="submit" href="{{ route('storePembelian') }}"
+                                    class="btn btn-gradient-primary me-2">Submit</button>
                                 <button href="{{ route('daftarPembelian') }}" class="btn btn-light">Cancel</button>
                             </form>
                         </div>

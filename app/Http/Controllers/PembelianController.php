@@ -25,7 +25,7 @@ class PembelianController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pembelian.add');
     }
 
     /**
@@ -36,7 +36,20 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kategori' => 'required', // Sesuaikan dengan nama atribut yang sesuai
+            'total' => 'required|int',
+        ]);
+
+        // Simpan data ke dalam database
+        PembelianController::create([
+            'kategori' => $request->kategori,
+            'total' => $request->total,
+            // Sesuaikan dengan kolom-kolom yang sesuai dalam model dan database Anda
+        ]);
+
+        // Setelah menyimpan, alihkan pengguna atau lakukan tindakan lain yang sesuai
+        return redirect()->route('daftarPembelian')->with('success', 'Pembelian berhasil disimpan.');
     }
 
     /**

@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\PembelianModel;
+use App\User;
 use Illuminate\Http\Request;
 
-class PembelianController extends Controller
+class UserController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $tbl_pembelians = PembelianModel::all();
-        return view('admin.pembelian.index', compact('tbl_pembelians'));
+        $tbl_users = User::all();
+        return view('admin.user.index', compact('tbl_users'));
     }
 
     /**
@@ -25,7 +25,7 @@ class PembelianController extends Controller
      */
     public function create()
     {
-        return view('admin.pembelian.add');
+        //
     }
 
     /**
@@ -36,15 +36,7 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = validator($request->all(), [
-            'kategori' => 'required',
-            'total' => 'required',
-        ])->validate();
-
-        $tbl_pembelians = new PembelianModel($validatedData);
-        $tbl_pembelians->save();
-
-        return redirect(route('daftarPembelian'))->with('success', 'Data Berhasil Disimpan');
+        //
     }
 
     /**

@@ -75,6 +75,18 @@
         </div>
       </li>
       <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="collapse" href="#ui" aria-expanded="false" aria-controls="ui">
+          <span class="menu-title">Settings Resto</span>
+          <i class="menu-arrow"></i>
+          <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+        </a>
+        <div class="collapse" id="ui">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{route('daftarUser')}}">Manajemen User</a></li>           
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item">
         <form id="logout-form" action="{{route('logout')}}" method="post">
             @csrf
         </form>
@@ -82,8 +94,9 @@
             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
             role="button" class="nav-link">
             <span class="menu-title">Logout</span>
+
                 <i class="nav-icon fa fa-sign-out menu-icon"></i>
             </a>
-      </li>
+        </li>
     </ul>
-  </nav>
+</nav>

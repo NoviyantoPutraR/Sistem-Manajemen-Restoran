@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('addJavascript')
+
+@endsection
+
 @section('content')
         <div class="main-panel">
           <div class="content-wrapper">
@@ -31,28 +35,33 @@
               <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-				  
                     <div class="table-responsive">
 						<table class="table table-hover table-striped mx-auto">
 							<thead>
 								<tr>
-									<th>ID</th>
-									<th>Meja</th>
-									<th>Waktu</th>
-									<th>Status</th>
-									<th>Operator</th>
+									<th style="width: 5%;">ID</th>
+									<th style="width: 10%;">Meja</th>
+									<th style="width: 10%;">Waktu</th>
+									<th style="width: 10%;">Status</th>
+									<th style="width: 10%;">Operator</th>
+                  <th style="width: 5%;"></th>
 								</tr>
 							</thead>
 							<tbody>
-								
+                @foreach ($tbl_pembelians as $tbl_pembelian)
 									<tr>
-										<td>#</td>
-										<td>#</td>
-										<td>#</td>
-										<td>#</td>
-										<td>#</td>
+										<td>{{ $loop->index + 1 }}</td>
+										<td>{{ $tbl_pembelian->kategori }}</td>
+										<td>{{ \Carbon\Carbon::parse($tbl_pembelian->created_at)->format('Y-m-d H:i:s') }}</td>
+										<td></td>
+										<td></td>
+                    <td>
+                      <a href="#" class="btn btn-gradient-warning btn-sm" role="button">Edit</a>
+                      <a href="{{ route('deletePemesanan', ['id_pembelian'=> $tbl_pembelian->id_pembelian]) }}" 
+                      class="btn btn-gradient-danger btn-sm" role="button">Hapus</a>
+                    </td>
 									</tr>
-								
+								@endforeach
 							</tbody>
 						</table>
 					</div>					

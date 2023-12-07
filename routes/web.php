@@ -67,3 +67,12 @@ Route::middleware('auth')->group(function () {
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware('my-login');
+
+//menu
+Route::get('/admin/menu', 'MenuController@index')->name('daftarMenu');
+Route::get('/admin/menu/create', 'MenuController@create')->name('createMenu');
+
+
+
+//route untuk menyimpan jurusan, perhatikan bahwa fungsi route nya adalah post
+Route::post('/admin/menu/create', 'MenuController@store')->name('storeMenu');

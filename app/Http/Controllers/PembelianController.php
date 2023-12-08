@@ -64,9 +64,11 @@ class PembelianController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(PembelianModel $tbl_pembelians)
     {
-        //
+        return view('admin.pembelian.edit', [
+            'tbl_pembelians' => $tbl_pembelians,
+        ]);
     }
 
     /**
@@ -76,9 +78,18 @@ class PembelianController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, PembelianModel $tbl_pembelians)
     {
-        //
+        $validatedData = validator($request->all(), [
+            'kategori' => 'required',
+            'total' => 'required',
+        ])->validate();
+
+        $tbl_pembelians->kategori = $validatedData['kategori'];
+        $tbl_pembelians->total = $validatedData['total'];
+        $tbl_pembelians->save();
+
+        return redirect(route('daftarJurusan'))->with('success', 'Data Berhasil Di update');;
     }
 
     /**

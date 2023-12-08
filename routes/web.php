@@ -36,6 +36,10 @@ Route::get('/admin/user', 'UserController@index')->name('daftarUser');
 
 Route::get('/admin/pembelian/add', 'PembelianController@create')->name('addPembelian');
 Route::post('/admin/pembelian/add', 'PembelianController@store')->name('storePembelian');
+Route::get('/admin/pembelian/{id_pembelian}/edit', 'PembelianController@edit')->name('editPembelian');
+
+// route untuk menyimpan perubahan jurusan, perhatikan bahwa fungsi routenya adalah post
+Route::post('/admin/pembelian/{id_pembelian}/edit', 'PembelianController@update')->name('updatePembelian');
 
 
 

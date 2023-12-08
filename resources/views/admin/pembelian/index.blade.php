@@ -37,7 +37,7 @@
                                         <tr>
                                             <th>Id Pembelian</th>
                                             <th>Kategori</th>
-                                            <th>Total</th>
+                                            <th>Total Nominal</th>
                                             <th>Waktu</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -45,14 +45,14 @@
                                     <tbody>
                                         @foreach ($tbl_pembelians as $tbl_pembelian)
                                             <tr>
-                                                <td>{{ $loop->index + 1 }}</td>
+                                                <td>{{ $tbl_pembelian->id_pembelian }}</td>
                                                 <td>{{ $tbl_pembelian->kategori }}</td>
                                                 <td>{{ $tbl_pembelian->total }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($tbl_pembelian->created_at)->format('Y-m-d H:i:s') }}
+                                                <td>{{ \Carbon\Carbon::parse($tbl_pembelian->created_at)->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s') }}
                                                 </td>
                                                 <td>
-                                                    <a href="#" class="btn btn-gradient-warning btn-sm"
-                                                        role="button">Edit</a>
+                                                    <a href="{{ route('editPembelian', $tbl_pembelian->id_pembelian) }}"
+                                                        class="btn btn-gradient-warning btn-sm" role="button">Edit</a>
                                                     <a onclick="confirmDelete(this)" data-url="#"
                                                         class="btn btn-gradient-danger btn-sm" role="button">Hapus</a>
                                                 </td>

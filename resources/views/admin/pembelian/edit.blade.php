@@ -84,12 +84,14 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Detail Pembelian Bahan Baku</h4><br>
-                            <form method="POST" action="{{ route('storePembelian') }}" class="forms-sample">
+                            <form method="POST"
+                                action="{{ route('updatePembelian', ['tbl_pembelian' => $tbl_pembelians->id_pembelian]) }}"
+                                class="forms-sample">
                                 @csrf
                                 <div class="form-group">
                                     <label for="txtKategori">KATEGORI</label>
                                     <select name="kategori" class="form-control text-center" id="txtKategori"
-                                        onchange="updateTotal()">
+                                        onchange="updateTotal()" value="{{ $tbl_pembelians->kategori }}">
                                         <option value="none">-- Pilih kategori --</option>
                                         <option value="Daging">Daging</option>
                                         <option value="Seafood">Seafood</option>
@@ -109,12 +111,13 @@
 
                                 <div class="form-group">
                                     <label for="txtTotalNominal">TOTAL NOMINAL (Rp)</label>
-                                    <input name="total" type="int" class="form-control" id="txtTotalNominal" readonly>
+                                    <input name="total" type="double" class="form-control" id="txtTotalNominal" readonly
+                                        value="{{ $tbl_pembelians->total }}">
                                 </div>
 
-                                <button type="submit" href="{{ route('storePembelian') }}"
+                                <button type="submit" href="{{ route('updatePembelian') }}"
                                     class="btn btn-gradient-primary me-2">Submit</button>
-                                <button href="{{ route('daftarPembelian') }}" class="btn btn-light">Cancel</button>
+                                <a href="{{ route('daftarPembelian') }}" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
                     </div>

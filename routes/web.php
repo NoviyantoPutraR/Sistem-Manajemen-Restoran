@@ -32,6 +32,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::get('/admin/pembelian', 'PembelianController@index')->name('daftarPembelian');
 
+Route::get('/admin/pemesanan', 'PemesananController@index')->name('daftarPemesanan');
+Route::get('/admin/pemesanan/{tbl_pembelian}/delete', 'PemesananController@destroy')->name('deletePemesanan');
+
+
 Route::get('/admin/user', 'UserController@index')->name('daftarUser');
 
 Route::get('/admin/pembelian/add', 'PembelianController@create')->name('addPembelian');

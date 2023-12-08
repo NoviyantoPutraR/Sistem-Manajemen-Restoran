@@ -1,5 +1,23 @@
 @extends('layouts.master')
 
+@section('addJavascript')
+<script>
+	confirmDelete = function(button) {
+		var url = $(button).data('url');
+		swal({
+			'title': 'Konfirmasi Hapus',
+			'text': 'Apakah kamu yakin ingin menghapus?',
+			'dangermode': true,
+			'buttons': true
+		}).then(function(value) {
+			if (value) {
+				window.location = url;
+			}
+		})
+	}
+</script>
+@endsection
+
 @section('content')
     <div class="main-panel">
         <div class="content-wrapper">

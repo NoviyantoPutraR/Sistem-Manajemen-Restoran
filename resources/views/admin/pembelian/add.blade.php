@@ -23,9 +23,19 @@
             // Ganti dengan logika atau database untuk mendapatkan harga per item berdasarkan kategori
             switch (kategori) {
                 case 'Daging':
-                    return 15000; // Harga per kilogram
+                    return 100000; // Harga per kilogram
                 case 'Seafood':
-                    return 20000; // Harga per kilogram 
+                    return 50000; // Harga per kilogram 
+                case 'Karbo':
+                    return 25000;
+                case 'Sayur':
+                    return 20000;
+                case 'Buah':
+                    return 18000;
+                case 'Bumbu':
+                    return 10000;
+                case 'Tepung':
+                    return 14000;
                     // ... tambahkan kategori lainnya sesuai kebutuhan
                 default:
                     return 0;
@@ -100,7 +110,6 @@
                                         <option value="Tepung">Tepung</option>
                                     </select>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="txtTotalItem">TOTAL ITEM</label>
                                     <input type="int" class="form-control" id="txtTotalItem"
@@ -114,7 +123,7 @@
 
                                 <button type="submit" href="{{ route('storePembelian') }}"
                                     class="btn btn-gradient-primary me-2">Submit</button>
-                                <button href="{{ route('daftarPembelian') }}" class="btn btn-light">Cancel</button>
+                                <a href="{{ route('daftarPembelian') }}" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
                     </div>

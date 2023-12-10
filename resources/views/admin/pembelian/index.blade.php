@@ -1,21 +1,24 @@
 @extends('layouts.master')
 
 @section('addJavascript')
-<script>
-	confirmDelete = function(button) {
-		var url = $(button).data('url');
-		swal({
-			'title': 'Konfirmasi Hapus',
-			'text': 'Apakah kamu yakin ingin menghapus?',
-			'dangermode': true,
-			'buttons': true
-		}).then(function(value) {
-			if (value) {
-				window.location = url;
-			}
-		})
-	}
-</script>
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+    <script>
+        confirmDelete = function(button) {
+            var url = $(button).data('url');
+            swal({
+                'title': 'Konfirmasi Hapus',
+                'text': 'Apakah kamu yakin ingin menghapus?',
+                'dangermode': true,
+                'buttons': true
+            }).then(function(value) {
+                if (value) {
+                    window.location = url;
+                }
+            })
+        }
+    </script>
 @endsection
 
 @section('content')
@@ -69,9 +72,10 @@
                                                 <td>{{ \Carbon\Carbon::parse($tbl_pembelian->created_at)->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s') }}
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('editPembelian', $tbl_pembelian->id_pembelian) }}"
+                                                    <a href="{{ route('editPembelian', ['id' => $tbl_pembelian->id_pembelian]) }}"
                                                         class="btn btn-gradient-warning btn-sm" role="button">Edit</a>
-                                                    <a onclick="confirmDelete(this)" data-url="#"
+                                                    <a onclick="confirmDelete(this)"
+                                                        data-url="{{ route('deletePembelian', ['id' => $tbl_pembelian->id_pembelian]) }}"
                                                         class="btn btn-gradient-danger btn-sm" role="button">Hapus</a>
                                                 </td>
                                             </tr>

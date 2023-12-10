@@ -30,7 +30,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     })->name('adminDashboard');
 });
 
-Route::get('/admin/pembelian', 'PembelianController@index')->name('daftarPembelian');
+
 
 Route::get('/admin/pemesanan', 'PemesananController@index')->name('daftarPemesanan');
 Route::get('/admin/pemesanan/{tbl_pembelian}/delete', 'PemesananController@destroy')->name('deletePemesanan');
@@ -38,14 +38,13 @@ Route::get('/admin/pemesanan/{tbl_pembelian}/delete', 'PemesananController@destr
 
 Route::get('/admin/user', 'UserController@index')->name('daftarUser');
 
+Route::get('/admin/pembelian', 'PembelianController@index')->name('daftarPembelian');
 Route::get('/admin/pembelian/add', 'PembelianController@create')->name('addPembelian');
 Route::post('/admin/pembelian/add', 'PembelianController@store')->name('storePembelian');
 Route::get('/admin/pembelian/{id_pembelian}/edit', 'PembelianController@edit')->name('editPembelian');
-
 // route untuk menyimpan perubahan jurusan, perhatikan bahwa fungsi routenya adalah post
 Route::post('/admin/pembelian/{id_pembelian}/edit', 'PembelianController@update')->name('updatePembelian');
-
-
+Route::get('/admin/pembelian/{id_pembelian}/delete', 'PembelianController@destroy')->name('deletePembelian');
 
 Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/manager/dashboard', function () {

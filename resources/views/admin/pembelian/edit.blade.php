@@ -23,9 +23,19 @@
             // Ganti dengan logika atau database untuk mendapatkan harga per item berdasarkan kategori
             switch (kategori) {
                 case 'Daging':
-                    return 15000; // Harga per kilogram
+                    return 100000; // Harga per kilogram
                 case 'Seafood':
-                    return 20000; // Harga per kilogram 
+                    return 50000; // Harga per kilogram 
+                case 'Karbo':
+                    return 25000;
+                case 'Sayur':
+                    return 20000;
+                case 'Buah':
+                    return 18000;
+                case 'Bumbu':
+                    return 10000;
+                case 'Tepung':
+                    return 14000;
                     // ... tambahkan kategori lainnya sesuai kebutuhan
                 default:
                     return 0;
@@ -71,7 +81,7 @@
                             <a href="{{ route('daftarPembelian') }}">Pengeluaran</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            <span>Tambah Pembelian Bahan Baku</span>
+                            <span>Edit Pembelian Bahan Baku</span>
                         </li>
                     </ul>
                 </nav>
@@ -85,7 +95,7 @@
                         <div class="card-body">
                             <h4 class="card-title">Detail Pembelian Bahan Baku</h4><br>
                             <form method="POST"
-                                action="{{ route('updatePembelian', ['tbl_pembelian' => $tbl_pembelians->id_pembelian]) }}"
+                                action="{{ route('updatePembelian', ['id' => $tbl_pembelians->id_pembelian]) }}"
                                 class="forms-sample">
                                 @csrf
                                 <div class="form-group">
@@ -102,7 +112,6 @@
                                         <option value="Tepung">Tepung</option>
                                     </select>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="txtTotalItem">TOTAL ITEM</label>
                                     <input type="int" class="form-control" id="txtTotalItem"
@@ -115,7 +124,8 @@
                                         value="{{ $tbl_pembelians->total }}">
                                 </div>
 
-                                <button type="submit" href="{{ route('updatePembelian') }}"
+                                <button type="submit"
+                                    href="{{ route('updatePembelian', ['id' => $tbl_pembelians->id_pembelian]) }}"
                                     class="btn btn-gradient-primary me-2">Submit</button>
                                 <a href="{{ route('daftarPembelian') }}" class="btn btn-light">Cancel</a>
                             </form>

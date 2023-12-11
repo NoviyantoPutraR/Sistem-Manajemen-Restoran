@@ -45,7 +45,10 @@
 
         <div class="card">
             <div class="card-body">
-                <a href="{{ route('createMenu') }}" type="submit" class="btn btn-outline-info btn-fw" style="margin-bottom: 6px;">Tambah Menu</a>
+            <div class="card-body">
+                            <a href="{{ route('createMenu') }}" class="btn btn-outline-info btn-fw"
+                                style="margin-bottom: 10px;" role="button">Tambah Menu</a>
+                            <div class="table-responsive">
                 <table class="table table-hover" id="data-table">
                     <thead style="background-color: #d1c4e9; color: #000;">
                         <tr>
@@ -53,6 +56,7 @@
                             <th>Nama Menu</th>
                             <th>Deskripsi</th>
                             <th>Harga</th>
+                            <th>Total Item</th>
                             <th>Total Transaksi</th>
                             <th>Aksi</th>
                         </tr>
@@ -64,11 +68,14 @@
                                 <td>{{ $menu->menu }}</td>
                                 <td>{{ $menu->deskripsi }}</td>
                                 <td>{{ $menu->harga }}</td>
+                                <td>{{ $menu->total_item }}</td>
                                 <td>{{ $menu->total_transaksi }}</td>
                                 <td>
-                                    <a href="{{ route('editMenu', ['id' => $menu->id]) }}" class="btn btn-warning btn-sm btn-action" role="button">Edit</a>
-                                    <a onclick="confirmDelete(this)" data-url="{{ route('deleteMenu', ['id' => $menu->id]) }}" class="btn btn-danger btn-sm btn-action" role="button">Hapus</a>
-                                </td>
+                                <a href="{{ route('editMenu', ['id' => $menu->id]) }}" class="btn btn-gradient-warning btn-sm" role="button">Edit</a>
+								<a onclick="confirmDelete(this)" 
+                                data-url="{{ route('deleteMenu', ['id' => $menu->id])}}" 
+                                class="btn btn-gradient-danger btn-sm" role="button">Hapus</a>
+										</td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -13,12 +13,12 @@ class CreateTblMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_menus', function (Blueprint $table) {
+        Menu::create('tbl_menus', function (Blueprint $table) {
             $table->bigIncrements('id'); // Mengganti 'menu' dengan 'id'
             $table->string('menu'); // Menambahkan kolom 'menu' sebagai nama menu
-            $table->enum('kategori', ['daging', 'seafood', 'karbo', 'sayur', 'buah', 'bumbu', 'tepung']);
             $table->text('deskripsi')->nullable(); // Menambahkan kolom 'deskripsi' dan membiarkan nilainya dapat kosong
             $table->decimal('harga', 10, 2); // Menambahkan kolom 'harga' dengan 2 digit di belakang koma
+            $table->integer('total_item');
             $table->integer('total_transaksi'); // Mengganti 'total' menjadi 'total_transaksi'
             $table->timestamps();
         });

@@ -13,8 +13,8 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::all(); // Ambil data dari tabel menus
-        return view('admin.Menu.index', ['menus' => $menus]);
+        $menus = Menu::all(); // Ambil semua data menu
+    return view('admin.menu.index', ['menus' => $menus]);
     }
 
     /**
@@ -24,7 +24,7 @@ class MenuController extends Controller
      */
     public function create()
     {
-        return view('menu.create');
+        return view('admin.menu.create');
     }
 
     /**
@@ -34,19 +34,21 @@ class MenuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+    
     {
         $validatedData = validator($request->all(), [
-            'menu'=> 'required|string|max:255', 
-            'kategori' => 'required|string', 
-            'deks'=>'required|string', 
-            'harga'=>'required|string', 
-            'total transaksi'=>'required|string', 
-        ])->validated();
+        'menu' => 'required',
+        'deskripsi' => 'required',
+        'harga' => 'required',
+        'total_item' => 'required',
+        'total_transaksi' => 'required',        
+     ])->validated();
 
         $menu = new Menu($validatedData);
         $menu->save();
 
-        return redirect(route('daftarMenu'))->with('success', 'Data Berhasil Disimpan');
+       return redirect()->route('daftarMenu')->with('success', 'Menu berhasil ditambahkan');
+
     }
 
     /**
@@ -66,9 +68,11 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Menu $menu)
     {
-        //
+        return view('admin.menu.edit', [
+            'menu' => $menu
+        ]);
     }
 
     /**
@@ -78,10 +82,28 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    public function update(Request $request, Menu $menu)
+{
+    $validatedData = validator($request->all(), [
+        'menu' => 'required|string|max:255', // Change 'nama' to 'menu'
+        'kategori' => 'required|string',
+        'deskripsi' => 'required|string', // Change 'deskripsi' to 'deks'
+        'harga' => 'required', 
+        'total_item' => 'required', // Change 'total item' to 'total_item'
+        'total_transaksi' => 'required', // Change 'total transaksi' to 'total_transaksi'
+    ])->validated();
+
+    $menu->menu = $validatedData['menu']; 
+    $menu->kategori = $validatedData['kategori'];
+    $menu->deskripsi = $validatedData['deskripsi']; // Change 'deskripsi' to 'deks'
+    $menu->harga = $validatedData['harga'];
+    $menu->total_item = $validatedData['total_item']; // Change 'total item' to 'total_item'
+    $menu->total_transaksi = $validatedData['total_transaksi']; // Change 'total transaksi' to 'total_transaksi'
+    $menu->save();
+
+    return redirect(route('daftarMenu'))->with('success', 'Data Berhasil Diupdate');
+}
+
 
     /**
      * Remove the specified resource from storage.
@@ -89,9 +111,10 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Menu $menu)
     {
-        //
+        $menu->delete();
+        return redirect(route('daftarMenu'))->with('success', 'Data Berhasil Di hapus');;
     }
 }
 

@@ -32,6 +32,7 @@
     </script>
 @endsection
 
+
 @section('content')
     <div class="main-panel">
         <div class="content-wrapper">
@@ -55,36 +56,37 @@
                 </nav>
             </div>
             {{-- Content header --}}
+            <!-- ... Existing code ... -->
 
             {{-- Form --}}
             <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <!-- ... Existing code ... -->
-                        <form method="POST" action="{{ route('storeMenu') }}" class="forms-sample" enctype="multipart/form-data">
-                            @csrf
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- ... Existing code ... -->
+                            <form method="POST" action="{{ route('storeMenu') }}" class="forms-sample" enctype="multipart/form-data">
+                                @csrf
                                 <div class="form-group">
                                     <label for="menuName">Menu</label><br>
-                                    <input type="text" name="menu" class="form-control" id="menuName" placeholder="Masukkan Nama Menu">
+                                    <input type="text" name="menu" class="form-control" id="menuName" placeholder="Masukkan Nama Menu" value="{{ isset($menu) ? $menu->menu : '' }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description">Deskripsi</label>
-                                    <textarea name="deskripsi" class="form-control" id="description" rows="3"></textarea>
+                                    <textarea name="description" class="form-control" id="description" rows="3">{{ isset($menu) ? $menu->description : '' }}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="harga">Harga</label>
-                                    <input type="number" name="harga" class="form-control" id="harga" placeholder="Masukkan harga" onchange="updateTotal()">
+                                    <input type="number" name="harga" class="form-control" id="harga" placeholder="Masukkan harga" onchange="updateTotal()" value="{{ isset($menu) ? $menu->harga : '' }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="txtTotalItem">Total Item</label>
-                                    <input type="number" name="total_item" class="form-control" id="txtTotalItem" placeholder="Masukkan total item" onchange="updateTotal()">
+                                    <input type="number" name="totalItem" class="form-control" id="txtTotalItem" placeholder="Masukkan total item" onchange="updateTotal()" value="{{ isset($menu) ? $menu->totalItem : '' }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="txtTotalNominal">Total Transaksi</label>
-                                    <input type="text" name="total_transaksi" class="form-control" id="txtTotalNominal" readonly>
-                                    <input type="hidden" name="total_transaksi" id="totalNominal">
+                                    <input type="text" name="totalNominal" class="form-control" id="txtTotalNominal" readonly>
+                                    <input type="hidden" name="totalNominal" id="totalNominal">
                                 </div>
 
                                 <button type="submit" class="btn btn-gradient-primary me-2">Simpan</button>

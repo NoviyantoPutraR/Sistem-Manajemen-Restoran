@@ -10,9 +10,9 @@ class Menu extends Model
 
     protected $fillable = [
         'menu',
-        'kategori',
-        'deks',
+        'deskripsi',
         'harga',
-        'total transaksi',
+        'total_item',
+        'total_transaksi',
     ];
 }

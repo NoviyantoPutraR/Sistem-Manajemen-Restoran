@@ -30,7 +30,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     })->name('adminDashboard');
 });
 
-Route::get('/admin/pembelian', 'PembelianController@index')->name('daftarPembelian');
+
+
+Route::get('/admin/pemesanan', 'PemesananController@index')->name('daftarPemesanan');
+Route::get('/admin/pemesanan/{tbl_pembelian}/delete', 'PemesananController@destroy')->name('deletePemesanan');
+
 
 
 Route::get('/admin/user', 'UserController@index')->name('daftarUser');
@@ -51,10 +55,13 @@ Route::delete('/admin/user/{user}', 'UserController@destroy')->name('deleteUser'
 
 
 
+Route::get('/admin/pembelian', 'PembelianController@index')->name('daftarPembelian');
 Route::get('/admin/pembelian/add', 'PembelianController@create')->name('addPembelian');
 Route::post('/admin/pembelian/add', 'PembelianController@store')->name('storePembelian');
-
-
+Route::get('/admin/pembelian/{id_pembelian}/edit', 'PembelianController@edit')->name('editPembelian');
+// route untuk menyimpan perubahan jurusan, perhatikan bahwa fungsi routenya adalah post
+Route::post('/admin/pembelian/{id_pembelian}/edit', 'PembelianController@update')->name('updatePembelian');
+Route::get('/admin/pembelian/{id_pembelian}/delete', 'PembelianController@destroy')->name('deletePembelian');
 
 Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/manager/dashboard', function () {
@@ -90,3 +97,17 @@ Route::middleware('auth')->group(function () {
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware('my-login');
+
+//menu
+Route::middleware(['auth'])->group(function () {
+Route::get('/admin/menu', 'MenuController@index')->name('daftarMenu');
+
+Route::get('/admin/menu/create', 'MenuController@create')->name('createMenu');
+Route::post('/admin/menu/create', 'MenuController@store')->name('storeMenu');
+//route untuk menampilkan view edit Menu
+Route::get('/admin/menu/{menu}/edit', 'MenuController@edit')->name('editMenu');
+//route untuk menyimpan perubahan Menu, perhatikan bahwa fungsi routenya adalah post
+Route::post('/admin/menu/{menu}/edit', 'MenuController@update')->name('updateMenu');
+//route untuk menghapus menu
+Route::get('menu/{menu}/delete', 'MenuController@destroy')->name('deleteMenu');
+});

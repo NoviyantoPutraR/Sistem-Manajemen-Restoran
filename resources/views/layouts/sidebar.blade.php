@@ -59,17 +59,18 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-          <span class="menu-title">Sample Pages</span>
+          <span class="menu-title">Data Master</span>
           <i class="menu-arrow"></i>
-          <i class="mdi mdi-medical-bag menu-icon"></i>
+          <i class="mdi mdi-food-fork-drink menu-icon"></i>
         </a>
         <div class="collapse" id="general-pages">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{route('daftarMenu')}}"> Menu </a></li>
+            <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Pelanggan </a></li>
+            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> Metode Pembayaran </a></li>
+            <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Bahan Baku </a></li>
+            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> Meja </a></li>
+            
           </ul>
         </div>
       </li>

@@ -26,7 +26,7 @@
 
             {{-- tabel --}}
             <div class="row">
-<<<<<<< HEAD
+
               <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
@@ -43,7 +43,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach ($tbl_users as $tbl_pembelian)
+								@foreach ($tbl_pembelians as $tbl_pembelian)
 									<tr>
 										<td>{{ $loop->index + 1 }}</td>
 										<td>{{ $tbl_pembelian->kategori }}</td>
@@ -61,45 +61,7 @@
 						</table>
 					</div>					
                   </div>
-=======
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <a href="{{ route('addPembelian') }}" class="btn btn-outline-info btn-fw"
-                                style="margin-bottom: 10px;" role="button">Tambah Pembelian</a>
-                            <div class="table-responsive">
-                                <table class="table table-hover table-striped text-center">
-                                    <thead>
-                                        <tr>
-                                            <th>Id Pembelian</th>
-                                            <th>Kategori</th>
-                                            <th>Total</th>
-                                            <th>Waktu</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($tbl_pembelians as $tbl_pembelian)
-                                            <tr>
-                                                <td>{{ $loop->index + 1 }}</td>
-                                                <td>{{ $tbl_pembelian->kategori }}</td>
-                                                <td>{{ $tbl_pembelian->total }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($tbl_pembelian->waktu)->format('Y-m-d H:i:s') }}
-                                                </td>
-                                                <td>
-                                                    <a href="#" class="btn btn-gradient-warning btn-sm"
-                                                        role="button">Edit</a>
-                                                    <a onclick="confirmDelete(this)" data-url="#"
-                                                        class="btn btn-gradient-danger btn-sm" role="button">Hapus</a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
->>>>>>> 866649b622a205ab1192e57190ce732c4361bb24
+</div>
                 </div>
             </div>
             {{-- table --}}

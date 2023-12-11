@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\PembelianModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class PembelianController extends Controller
 {
@@ -64,9 +66,11 @@ class PembelianController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(PembelianModel $tbl_pembelians)
     {
-        //
+        return view('admin.pembelian.edit', [
+            'tbl_pembelians' => $tbl_pembelians,
+        ]);
     }
 
     /**
@@ -76,10 +80,28 @@ class PembelianController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, PembelianModel $tbl_pembelians)
     {
-        //
+        if (!$tbl_pembelians) {
+            return redirect()->route('daftarPembelian')->with('error', 'Data tidak ditemukan.');
+        }
+
+        // Validasi data
+        $validatedData = Validator::make($request->all(), [
+            'kategori' => 'required',
+            'total' => 'required',
+        ])->validate();
+
+        // Simpan data yang diperbarui
+        $tbl_pembelians->update([
+            'kategori' => $validatedData['kategori'],
+            'total' => $validatedData['total'],
+        ]);
+
+        // Redirect ke halaman daftar pembelian dengan pesan sukses
+        return redirect()->route('daftarPembelian')->with('success', 'Data berhasil diperbarui.');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -87,8 +109,9 @@ class PembelianController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PembelianModel $tbl_pembelians)
     {
-        //
+        $tbl_pembelians->delete();
+        return redirect(route('daftarPembelian'))->with('success', 'Data Berhasil Di hapus');
     }
 }

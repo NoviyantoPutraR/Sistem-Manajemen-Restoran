@@ -14,14 +14,7 @@ class PembelianSeeder extends Seeder
     {
         DB::table('tbl_pembelians')->insert([
             'kategori' => 'daging',
-            'total' => 100,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        DB::table('tbl_pembelians')->insert([
-            'kategori' => 'sayur',
-            'total' => 50,
+            'total' => 10.000,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

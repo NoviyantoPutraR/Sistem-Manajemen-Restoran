@@ -36,7 +36,24 @@ Route::get('/admin/pemesanan', 'PemesananController@index')->name('daftarPemesan
 Route::get('/admin/pemesanan/{tbl_pembelian}/delete', 'PemesananController@destroy')->name('deletePemesanan');
 
 
+
 Route::get('/admin/user', 'UserController@index')->name('daftarUser');
+Route::get('/admin/user/add', 'UserController@create')->name('addUser');
+Route::post('/admin/user/add', 'UserController@store')->name('storeUser');
+
+// Menampilkan formulir edit
+Route::get('/admin/user/{user}/edit', 'UserController@edit')->name('editUser');
+
+// Menangani pembaruan pengguna
+Route::put('/admin/user/{user}', 'UserController@update')->name('updateUser');
+
+// Pembatalan edit
+Route::get('/admin/user/cancel-edit', 'UserController@cancelEdit')->name('cancelEdit');
+
+// Menangani penghapusan pengguna
+Route::delete('/admin/user/{user}', 'UserController@destroy')->name('deleteUser');
+
+
 
 Route::get('/admin/pembelian', 'PembelianController@index')->name('daftarPembelian');
 Route::get('/admin/pembelian/add', 'PembelianController@create')->name('addPembelian');

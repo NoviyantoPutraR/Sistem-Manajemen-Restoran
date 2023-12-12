@@ -20,7 +20,7 @@
             document.getElementById('txtTotalNominal').value = formattedTransaksi;
 
             // Set nilai totalTransaksi ke input hidden totalTransaksi untuk dikirimkan ke server
-            document.getElementById('totalNominalInput').value = totalTransaksi;
+            document.getElementById('totalNominal').value = totalTransaksi;
         }
 
         function formatRupiah(angka) {
@@ -58,12 +58,12 @@
 
             {{-- Form --}}
             <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <!-- ... Existing code ... -->
-                        <form method="POST" action="{{ route('storeMenu') }}" class="forms-sample" enctype="multipart/form-data">
-                            @csrf
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                        <h4 class="card-title">Tambah Menu </h4><br>
+                            <form method="POST" action="{{ route('storeMenu') }}" class="forms-sample" enctype="multipart/form-data">
+                                @csrf
                                 <div class="form-group">
                                     <label for="menuName">Menu</label><br>
                                     <input type="text" name="menu" class="form-control" id="menuName" placeholder="Masukkan Nama Menu">
@@ -95,9 +95,6 @@
                 </div>
             </div>
             {{-- Form --}}
-
-            <!-- ... Existing code ... -->
-
         </div>
     </div>
 @endsection

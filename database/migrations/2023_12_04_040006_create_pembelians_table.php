@@ -16,7 +16,8 @@ class CreatePembeliansTable extends Migration
         Schema::create('tbl_pembelians', function (Blueprint $table) {
             $table->bigIncrements('id_pembelian');
             $table->enum('kategori', ['daging', 'seafood', 'karbo', 'sayur', 'buah', 'bumbu', 'tepung']);
-            $table->decimal('total', 15, 3); // Presisi: 15 digit, 2 digit di belakang koma
+            $table->integer('total_item');
+            $table->integer('total_nominal'); // Presisi: 15 digit, 2 digit di belakang koma
             $table->timestamps();
         });
     }

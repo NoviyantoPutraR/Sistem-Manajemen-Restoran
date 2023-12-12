@@ -13,7 +13,7 @@ class CreateTblMenusTable extends Migration
      */
     public function up()
     {
-        Menu::create('tbl_menus', function (Blueprint $table) {
+        Schema::create('tbl_menus', function (Blueprint $table) {
             $table->bigIncrements('id'); // Mengganti 'menu' dengan 'id'
             $table->string('menu'); // Menambahkan kolom 'menu' sebagai nama menu
             $table->text('deskripsi')->nullable(); // Menambahkan kolom 'deskripsi' dan membiarkan nilainya dapat kosong

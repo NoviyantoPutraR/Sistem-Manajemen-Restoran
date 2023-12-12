@@ -15,10 +15,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Edit Pengguna</h4><br>
-                            <form method="POST" action="{{ route('updateUser', $tbl_users->id) }}">
+                            <form method="POST" action="{{ route('updateUser', ['id' => $tbl_users->id]) }}">
                                 @csrf
-                                <!-- @method('') -->
-
+                                @method('put')                
                                 <!-- Nama Lengkap -->
                                 <div class="form-group">
                                     <label for="name">Nama Lengkap:</label>
@@ -53,7 +52,7 @@
                                     <input type="password" name="password_confirmation" class="form-control">
                                 </div>
 
-                                <button href="{{ route('updateUser', $tbl_users->id) }}" type="submit" class="btn btn-gradient-primary me-2">Perbarui</button>
+                                <button type="submit" class="btn btn-gradient-primary me-2">Perbarui</button>
                                 <a href="{{ route('cancelEdit') }}" class="btn btn-light">Batal</a>
                             </form>
                         </div>

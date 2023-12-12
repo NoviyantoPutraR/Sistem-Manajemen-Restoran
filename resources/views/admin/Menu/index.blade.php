@@ -50,7 +50,7 @@
                                 style="margin-bottom: 10px;" role="button">Tambah Menu</a>
                             <div class="table-responsive">
                 <table class="table table-hover" id="data-table">
-                    <thead style="background-color: #d1c4e9; color: #000;">
+                    <thead>
                         <tr>
                             <th>No.</th>
                             <th>Nama Menu</th>

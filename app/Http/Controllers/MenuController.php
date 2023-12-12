@@ -34,22 +34,20 @@ class MenuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    
-    {
-        $validatedData = validator($request->all(), [
+{
+    $validatedData = $request->validate([
         'menu' => 'required',
         'deskripsi' => 'required',
         'harga' => 'required',
         'total_item' => 'required',
-        'total_transaksi' => 'required',        
-     ])->validated();
+        'total_transaksi' => 'required',
+    ]);
 
-        $menu = new Menu($validatedData);
-        $menu->save();
+    $menu = new Menu($validatedData);
+    $menu->save();
 
-       return redirect()->route('daftarMenu')->with('success', 'Menu berhasil ditambahkan');
-
-    }
+    return redirect()->route('daftarMenu')->with('success', 'Menu berhasil ditambahkan');
+}
 
     /**
      * Display the specified resource.
@@ -86,15 +84,13 @@ class MenuController extends Controller
 {
     $validatedData = validator($request->all(), [
         'menu' => 'required|string|max:255', // Change 'nama' to 'menu'
-        'kategori' => 'required|string',
         'deskripsi' => 'required|string', // Change 'deskripsi' to 'deks'
         'harga' => 'required', 
         'total_item' => 'required', // Change 'total item' to 'total_item'
         'total_transaksi' => 'required', // Change 'total transaksi' to 'total_transaksi'
     ])->validated();
 
-    $menu->menu = $validatedData['menu']; 
-    $menu->kategori = $validatedData['kategori'];
+    $menu->menu = $validatedData['menu'];
     $menu->deskripsi = $validatedData['deskripsi']; // Change 'deskripsi' to 'deks'
     $menu->harga = $validatedData['harga'];
     $menu->total_item = $validatedData['total_item']; // Change 'total item' to 'total_item'

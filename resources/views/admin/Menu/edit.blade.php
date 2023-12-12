@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('addJavascript')
-    <script>
+<script>
         document.addEventListener('DOMContentLoaded', function () {
             // ... script JavaScript Anda ...
         });
@@ -20,7 +20,7 @@
             document.getElementById('txtTotalNominal').value = formattedTransaksi;
 
             // Set nilai totalTransaksi ke input hidden totalTransaksi untuk dikirimkan ke server
-            document.getElementById('totalNominalInput').value = totalTransaksi;
+            document.getElementById('totalNominal').value = totalTransaksi;
         }
 
         function formatRupiah(angka) {
@@ -30,8 +30,8 @@
             return formatted;
         }
     </script>
-@endsection
 
+@endsection
 
 @section('content')
     <div class="main-panel">
@@ -50,43 +50,44 @@
                             <a href="{{ route('daftarMenu') }}">Menu</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            <span>Tambah Menu</span>
+                            <span>Edit Menu</span>
                         </li>
                     </ul>
                 </nav>
             </div>
             {{-- Content header --}}
-            <!-- ... Existing code ... -->
 
             {{-- Form --}}
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <!-- ... Existing code ... -->
-                            <form method="POST" action="{{ route('storeMenu') }}" class="forms-sample" enctype="multipart/form-data">
+                        <h4 class="card-title">Edit Menu </h4><br>
+                            <form action="{{ route('updateMenu', ['id' => $menu->id]) }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <label for="menuName">Menu</label><br>
-                                    <input type="text" name="menu" class="form-control" id="menuName" placeholder="Masukkan Nama Menu" value="{{ isset($menu) ? $menu->menu : '' }}">
+                                    <input type="text" name="menu" class="form-control" id="menuName" placeholder="Masukkan Nama Menu" value="{{ $menu->menu ?? '' }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description">Deskripsi</label>
-                                    <textarea name="description" class="form-control" id="description" rows="3">{{ isset($menu) ? $menu->description : '' }}</textarea>
+                                    <textarea name="deskripsi" class="form-control" id="description" rows="3">{{ $menu->deskripsi ?? '' }}</textarea>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="harga">Harga</label>
-                                    <input type="number" name="harga" class="form-control" id="harga" placeholder="Masukkan harga" onchange="updateTotal()" value="{{ isset($menu) ? $menu->harga : '' }}">
+                                    <input type="number" name="harga" class="form-control" id="harga" placeholder="Masukkan harga" value="{{ $menu->harga ?? '' }}" onchange="updateTotal()">
                                 </div>
+
                                 <div class="form-group">
                                     <label for="txtTotalItem">Total Item</label>
-                                    <input type="number" name="totalItem" class="form-control" id="txtTotalItem" placeholder="Masukkan total item" onchange="updateTotal()" value="{{ isset($menu) ? $menu->totalItem : '' }}">
+                                    <input type="number" name="total_item" class="form-control" id="txtTotalItem" placeholder="Masukkan total item" value="{{ $menu->total_item ?? '' }}" onchange="updateTotal()">
                                 </div>
+
                                 <div class="form-group">
                                     <label for="txtTotalNominal">Total Transaksi</label>
-                                    <input type="text" name="totalNominal" class="form-control" id="txtTotalNominal" readonly>
-                                    <input type="hidden" name="totalNominal" id="totalNominal">
+                                    <input type="text" name="total_transaksi" class="form-control" id="txtTotalNominal" readonly value="{{ $menu->total_transaksi ?? '' }}">
                                 </div>
 
                                 <button type="submit" class="btn btn-gradient-primary me-2">Simpan</button>
@@ -97,9 +98,6 @@
                 </div>
             </div>
             {{-- Form --}}
-
-            <!-- ... Existing code ... -->
-
         </div>
     </div>
 @endsection

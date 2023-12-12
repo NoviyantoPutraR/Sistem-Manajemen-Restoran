@@ -66,7 +66,7 @@
         <div class="collapse" id="general-pages">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="{{route('daftarMenu')}}"> Menu </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Pelanggan </a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{route('daftarPelanggan')}}"> Pelanggan </a></li>
             <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> Metode Pembayaran </a></li>
             <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Bahan Baku </a></li>
             <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> Meja </a></li>

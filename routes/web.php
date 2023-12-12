@@ -111,6 +111,7 @@ Route::post('/admin/menu/{menu}/edit', 'MenuController@update')->name('updateMen
 //route untuk menghapus menu
 Route::get('menu/{menu}/delete', 'MenuController@destroy')->name('deleteMenu');
 });
+
 //pelanggan
 Route::get('/admin/pelanggan', 'PelangganController@index')->name('daftarPelanggan');
 Route::get('/admin/pelanggan/create', 'PelangganController@create')->name('createPelanggan');

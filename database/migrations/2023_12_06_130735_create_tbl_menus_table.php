@@ -19,7 +19,7 @@ class CreateTblMenusTable extends Migration
             $table->text('deskripsi')->nullable(); // Menambahkan kolom 'deskripsi' dan membiarkan nilainya dapat kosong
             $table->decimal('harga', 10, 2); // Menambahkan kolom 'harga' dengan 2 digit di belakang koma
             $table->integer('total_item');
-            $table->integer('total_transaksi'); // Mengganti 'total' menjadi 'total_transaksi'
+            $table->decimal('total_transaksi'); // Mengganti 'total' menjadi 'total_transaksi'
             $table->timestamps();
         });
     }

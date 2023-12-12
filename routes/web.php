@@ -30,15 +30,29 @@ Route::middleware(['auth', 'admin'])->group(function () {
     })->name('adminDashboard');
 });
 
-
-
+Route::get('/admin/pembelian', 'PembelianController@index')->name('daftarPembelian');
 Route::get('/admin/pemesanan', 'PemesananController@index')->name('daftarPemesanan');
 Route::get('/admin/pemesanan/{tbl_pembelian}/delete', 'PemesananController@destroy')->name('deletePemesanan');
 
 
 Route::get('/admin/user', 'UserController@index')->name('daftarUser');
+Route::get('/admin/user/add', 'UserController@create')->name('addUser');
+Route::post('/admin/user/add', 'UserController@store')->name('storeUser');
 
-Route::get('/admin/pembelian', 'PembelianController@index')->name('daftarPembelian');
+// Menampilkan formulir edit
+Route::get('/admin/user/{user}/edit', 'UserController@edit')->name('editUser');
+
+// Menangani pembaruan pengguna
+Route::post('/admin/user/{user}', 'UserController@update')->name('updateUser');
+
+// Pembatalan edit
+Route::get('/admin/user/cancel-edit', 'UserController@cancelEdit')->name('cancelEdit');
+
+// Menangani penghapusan pengguna
+Route::delete('/admin/user/{user}', 'UserController@destroy')->name('deleteUser');
+
+
+
 Route::get('/admin/pembelian/add', 'PembelianController@create')->name('addPembelian');
 Route::post('/admin/pembelian/add', 'PembelianController@store')->name('storePembelian');
 Route::get('/admin/pembelian/{tbl_pembelians}/edit', 'PembelianController@edit')->name('editPembelian');
@@ -94,3 +108,8 @@ Route::middleware(['auth'])->group(function () {
     //route untuk menghapus menu
     Route::get('menu/{menu}/delete', 'MenuController@destroy')->name('deleteMenu');
 });
+
+//pelanggan
+Route::get('/admin/pelanggan', 'PelangganController@index')->name('daftarPelanggan');
+Route::get('/admin/pelanggan/create', 'PelangganController@create')->name('createPelanggan');
+Route::post('/admin/pelanggan/create', 'PelangganController@store')->name('storePelanggan');

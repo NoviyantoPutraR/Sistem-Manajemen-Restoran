@@ -18,6 +18,8 @@ class UserController extends Controller
         return view('admin.user.index', compact('tbl_users'));
     }
 
+    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -25,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user.add');
     }
 
     /**
@@ -33,19 +35,36 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
+     */    
+
     public function store(Request $request)
     {
-        //
-    }
-
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:tbl_users',
+            'role' => 'required|in:admin,manager,employee',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+    
+        // Simpan data ke dalam database
+        User::create([
+            'name' => $request->full_name,
+            'email' => $request->email,
+            'role' => $request->role,
+            'password' => bcrypt($request->password),
+        ]);
+    
+        // Setelah menyimpan, alihkan pengguna atau lakukan tindakan lain yang sesuai
+        return redirect()->route('daftarUser')->with('success', 'Pengguna berhasil didaftarkan.');
+    } 
+    
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $tbl_users)
     {
         //
     }
@@ -56,9 +75,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $tbl_users)
     {
-        //
+          return view('admin/user/edit', [
+            'tbl_users' => $tbl_users
+          ]);
+    }
+    public function cancelEdit()
+    {
+        // Logika pembatalan edit, jika diperlukan
+        return redirect()->route('daftarUser'); // Gantilah dengan rute yang sesuai
     }
 
     /**
@@ -68,19 +94,33 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $tbl_users)
     {
-        //
-    }
+        $validatedData = validator($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'role' => 'required',
+            'password' => 'required'
+        ])->validate();
 
+        $tbl_users->name = $validatedData['name'];
+        $tbl_users->email = $validatedData['email'];
+        $tbl_users->role = $validatedData['role'];
+        $tbl_users->password = $validatedData['password'];
+        $tbl_users->save();
+
+        return redirect(route('daftarUser'))->with('success', 'Data Berhasil Di update');;
+    }
+    
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $tbl_users)
     {
-        //
+       $tbl_users->delete();
+       return redirect(route('daftarUser'))->with('succes', 'Data Berhasil Di Hapus');;
     }
 }

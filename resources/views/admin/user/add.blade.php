@@ -1,87 +1,69 @@
-<!-- @extends('auth.master')
+@extends('layouts.master')
 
 @section('content')
-<div class="card">
-    <div class="card-body login-card-body">
-        <p class="login-box-msg">{{ __('Register') }}</p>
-
-        <form action="{{route('register')}}" method="post">
-            @csrf
-
-            <div class="input-group mb-3">
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                    placeholder="Full name" name="name" value="{{ old('name') }}" required autocomplete="name"
-                    autofocus>
-                <div class="input-group-append input-group-text">
-                    <span class="fa fa-user"></span>
-                </div>
+    <div class="main-panel">
+        <div class="content-wrapper">
+            {{-- content header --}}
+            <div class="page-header">
+                <!-- ... (existing content) ... -->
             </div>
-            @error('name')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
+            {{-- content header --}}
 
-            <div class="input-group mb-3">
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                    value="{{old('email')}}" placeholder="Email" required autocomplete="email">
-                <div class="input-group-append input-group-text">
-                    <span class="fa fa-envelope"></span>
-                </div>
-            </div>
-            @error('email')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-
-            <div class="input-group mb-3">
-                <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" required>
-                    <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                    <option value="manager" {{ old('role') == 'manager' ? 'selected' : '' }}>Manager</option>
-                    <option value="employee" {{ old('role') == 'employee' ? 'selected' : '' }}>Employee</option>
-                </select>
-                <div class="input-group-append input-group-text">
-                    <span class="fa fa-user"></span>
-                </div>
-            </div>
-            @error('role')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-            
-
-            <div class="input-group mb-3">
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                    placeholder="Password" name="password" required autocomplete="new-password">
-                <div class="input-group-append input-group-text">
-                    <span class="fa fa-lock"></span>
-                </div>
-            </div>
-            @error('password')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-
-            <div class="input-group mb-3">
-                <input id="password-confirm" type="password" class="form-control" placeholder="Retype password"
-                    name="password_confirmation" required autocomplete="new-password">
-                <div class="input-group-append input-group-text">
-                    <span class="fa fa-lock"></span>
-                </div>
-            </div>
-
+            {{-- tabel --}}
             <div class="row">
-                <div class="col-4 offset-8">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">{{ __('Register') }}</button>
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Tambah User</h4><br>
+                            <form method="POST" action="{{ route('storeUser') }}">
+                                @csrf
+
+                                <!-- Full Name -->
+                                <div class="form-group">
+                                    <label for="name">Full Name:</label>
+                                    <input type="text" name="name" class="form-control" value="{{ old('full_name') }}" required>
+                                    <!-- Tampilan pesan kesalahan -->
+                                    @error('full_name')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror                                
+                                </div>
+
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
+                                </div>
+
+                                <!-- Role -->
+                                <div class="form-group">
+                                    <label for="role">Role:</label>
+                                    <select name="role" class="form-control" required>
+                                        <option value="admin">Admin</option>
+                                        <option value="manager">Manager</option>
+                                        <option value="employee">Employee</option>
+                                    </select>
+                                </div>
+
+                                <!-- Password -->
+                                <div class="form-group">
+                                    <label for="password">Password:</label>
+                                    <input type="password" name="password" class="form-control" required>
+                                </div>
+
+                                <!-- Confirm Password -->
+                                <div class="form-group">
+                                    <label for="password_confirmation">Confirm Password:</label>
+                                    <input type="password" name="password_confirmation" class="form-control" required>
+                                </div>
+
+                                <button href="{{ route('storeUser') }}" type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                                <button type="button" class="btn btn-light">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.col -->
+                {{-- table --}}
             </div>
-        </form>
-        
+        </div>
     </div>
-    <!-- /.login-card-body -->
-</div>
-@endsection -->
+@endsection

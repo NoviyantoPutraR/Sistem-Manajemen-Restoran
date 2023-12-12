@@ -77,18 +77,10 @@ class UserController extends Controller
      */
     public function edit(User $tbl_users)
     {
-          // Ambil data pengguna berdasarkan $id dari database
-          $tbl_users = User::find($tbl_users);
-
-          // Periksa apakah pengguna ditemukan
-          if (!$tbl_users) {
-              return redirect()->route('daftarUser')->with('error', 'Pengguna tidak ditemukan.');
-          }
-  
-          // Kirim data pengguna ke tampilan edit
-          return view('admin.user.edit', compact('tbl_users'));
+          return view('admin/user/edit', [
+            'tbl_users' => $tbl_users
+          ]);
     }
-
     public function cancelEdit()
     {
         // Logika pembatalan edit, jika diperlukan
@@ -128,17 +120,7 @@ class UserController extends Controller
      */
     public function destroy(User $tbl_users)
     {
-        try {
-            // Cari data pengguna berdasarkan ID
-            $user = User::findOrFail($tbl_users);
-    
-            // Hapus pengguna
-            $user->delete();
-    
-            return redirect()->route('daftarUser')->with('success', 'Pengguna berhasil dihapus.');
-        } catch (\Exception $e) {
-            // Tangani kesalahan jika terjadi
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
-        }
+       $tbl_users->delete();
+       return redirect(route('daftarUser'))->with('succes', 'Data Berhasil Di Hapus');;
     }
 }

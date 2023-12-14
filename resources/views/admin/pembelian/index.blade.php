@@ -9,7 +9,7 @@
             var url = $(button).data('url');
             swal({
                 'title': 'Konfirmasi Hapus',
-                'text': 'Apakah kamu yakin ingin menghapus?',
+                'text': 'Apakah kamu yakin ingin menghapus ?',
                 'dangermode': true,
                 'buttons': true
             }).then(function(value) {
@@ -58,6 +58,7 @@
                                         <tr>
                                             <th>Id Pembelian</th>
                                             <th>Kategori</th>
+                                            <th>Total Item</th>
                                             <th>Total Nominal</th>
                                             <th>Waktu</th>
                                             <th>Aksi</th>
@@ -68,8 +69,10 @@
                                             <tr>
                                                 <td>{{ $tbl_pembelian->id_pembelian }}</td>
                                                 <td>{{ $tbl_pembelian->kategori }}</td>
-                                                <td>{{ $tbl_pembelian->total }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($tbl_pembelian->created_at)->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s') }}
+                                                <td>{{ $tbl_pembelian->total_item }}</td>
+                                                <td>{{ number_format($tbl_pembelian->total_nominal, 0, ',', '.') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($tbl_pembelian->created_at)->setTimezone('Asia/Jakarta')->translatedFormat('j M Y') }}
+                                                </td>
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('editPembelian', ['id' => $tbl_pembelian->id_pembelian]) }}"
@@ -81,6 +84,7 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>

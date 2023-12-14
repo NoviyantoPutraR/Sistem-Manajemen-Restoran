@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\PembelianModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 
 class PembelianController extends Controller
@@ -17,7 +16,10 @@ class PembelianController extends Controller
     public function index()
     {
         $tbl_pembelians = PembelianModel::all();
-        return view('admin.pembelian.index', compact('tbl_pembelians'));
+        // return view('admin.pembelian.index', compact('tbl_pembelians'));
+        return view('admin.pembelian.index', [
+            'tbl_pembelians' => $tbl_pembelians
+        ]);
     }
 
     /**
@@ -40,7 +42,8 @@ class PembelianController extends Controller
     {
         $validatedData = validator($request->all(), [
             'kategori' => 'required',
-            'total' => 'required',
+            'total_item' => 'required',
+            'total_nominal' => 'required',
         ])->validate();
 
         $tbl_pembelians = new PembelianModel($validatedData);
@@ -52,10 +55,10 @@ class PembelianController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \app\PembelianModel $tbl_pembelians
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(PembelianModel $tbl_pembelians)
     {
         //
     }
@@ -63,7 +66,7 @@ class PembelianController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \app\PembelianModel $tbl_pembelians
      * @return \Illuminate\Http\Response
      */
     public function edit(PembelianModel $tbl_pembelians)
@@ -77,36 +80,31 @@ class PembelianController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \app\PembelianModel $tbl_pembelians
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, PembelianModel $tbl_pembelians)
     {
-        if (!$tbl_pembelians) {
-            return redirect()->route('daftarPembelian')->with('error', 'Data tidak ditemukan.');
-        }
 
-        // Validasi data
-        $validatedData = Validator::make($request->all(), [
+        $validatedData = validator($request->all(), [
             'kategori' => 'required',
-            'total' => 'required',
+            'total_item' => 'required',
+            'total_nominal' => 'required',
         ])->validate();
 
-        // Simpan data yang diperbarui
-        $tbl_pembelians->update([
-            'kategori' => $validatedData['kategori'],
-            'total' => $validatedData['total'],
-        ]);
+        $tbl_pembelians->kategori = $validatedData['kategori'];
+        $tbl_pembelians->total_item = $validatedData['total_item'];
+        $tbl_pembelians->total_nominal = $validatedData['total_nominal'];
+        $tbl_pembelians->save();
 
-        // Redirect ke halaman daftar pembelian dengan pesan sukses
-        return redirect()->route('daftarPembelian')->with('success', 'Data berhasil diperbarui.');
+        return redirect(route('daftarPembelian'))->with('success', 'Data Berhasil Disimpan');
     }
 
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \app\PembelianModel $tbl_pembelians
      * @return \Illuminate\Http\Response
      */
     public function destroy(PembelianModel $tbl_pembelians)

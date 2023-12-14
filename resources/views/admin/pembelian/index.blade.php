@@ -1,10 +1,20 @@
 @extends('layouts.master')
 
+@section('addCss')
+    <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sweetalert.min.css') }}">
+@endsection
+
 @section('addJavascript')
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     <script>
+        $(function() {
+            $("#data-table").DataTable();
+        });
+
+
         confirmDelete = function(button) {
             var url = $(button).data('url');
             swal({
@@ -28,7 +38,7 @@
             <div class="page-header">
                 <h3 class="page-title">
                     <span class="page-title-icon bg-gradient-primary text-white me-2">
-                        <i class="mdi mdi-home"></i>
+                        <i class="mdi mdi-currency-usd"></i>
                     </span>
                     Pengeluaran {{ Str::upper(Auth::user()->role) }}
                 </h3>
@@ -52,8 +62,9 @@
                         <div class="card-body">
                             <a href="{{ route('addPembelian') }}" class="btn btn-outline-info btn-fw"
                                 style="margin-bottom: 10px;" role="button">Tambah Pembelian</a>
+                            <h4 class="card-title text-center">Daftar Pembelian Bahan Baku</h4>
                             <div class="table-responsive">
-                                <table class="table table-hover table-striped text-center">
+                                <table class="table table-hover table-striped text-center " id="data-table">
                                     <thead>
                                         <tr>
                                             <th>Id Pembelian</th>

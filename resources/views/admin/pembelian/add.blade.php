@@ -8,11 +8,11 @@
 
             // Logika untuk menghitung total nominal berdasarkan kategori dan total item
             var hargaPerItem = getHargaPerItem(kategori);
-            var totalNominal = totalItem * hargaPerItem;
+            var totalNominal = Math.round(totalItem *
+                hargaPerItem); // Menggunakan Math.round untuk memastikan nilai integer
 
-            // Format totalNominal ke dalam format rupiah dengan titik sebagai pemisah ribuan
-            var formattedNominal = formatRupiah(totalNominal);
-
+            // Tampilkan nilai yang diformat ke dalam elemen dengan id 'txtTotalNominal'
+            var formattedNominal = (totalNominal);
             document.getElementById('txtTotalNominal').value = formattedNominal;
         }
 
@@ -59,7 +59,7 @@
             // Tambahkan titik sebagai pemisah ribuan
             rupiah = rupiah.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
-            return prefix === undefined ? rupiah : rupiah ? +rupiah : '';
+            return prefix === undefined ? rupiah : prefix + rupiah;
         }
     </script>
 @endsection
@@ -71,7 +71,7 @@
             <div class="page-header">
                 <h3 class="page-title">
                     <span class="page-title-icon bg-gradient-primary text-white me-2">
-                        <i class="mdi mdi-home"></i>
+                        <i class="mdi mdi-currency-usd"></i>
                     </span>
                     Pengeluaran {{ Str::upper(Auth::user()->role) }}
                 </h3>

@@ -15,13 +15,12 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Edit Pengguna</h4><br>
-                            <form method="POST" action="{{ route('updateUser', ['id' => $tbl_users->id]) }}">
-                                @csrf
-                                @method('put')                
+                            <form action="{{ route('updateUser', ['id' => $tbl_users->id]) }}" method="post">
+                                @csrf                                
                                 <!-- Nama Lengkap -->
                                 <div class="form-group">
                                     <label for="name">Nama Lengkap:</label>
-                                    <input type="text" name="name" class="form-control" value="{{ $tbl_users->name }}" required>
+                                    <input type="text" name="name" class="form-control" value="{{ $tbl_users->name }}" required>                                    
                                 </div>
 
                                 <!-- Email -->
@@ -43,13 +42,13 @@
                                 <!-- Sandi (opsional) -->
                                 <div class="form-group">
                                     <label for="password">Sandi:</label>
-                                    <input type="password" name="password" class="form-control">
+                                    <input type="password" name="password" class="form-control" placeholder="Kosongkan jika tidak ingin mengganti">
                                 </div>
 
                                 <!-- Konfirmasi Sandi (opsional) -->
                                 <div class="form-group">
                                     <label for="password_confirmation">Konfirmasi Sandi:</label>
-                                    <input type="password" name="password_confirmation" class="form-control">
+                                    <input type="password" name="password_confirmation" class="form-control" placeholder="Kosongkan jika tidak ingin mengganti">
                                 </div>
 
                                 <button type="submit" class="btn btn-gradient-primary me-2">Perbarui</button>

@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Tambah User</h4><br>
-                            <form method="POST" action="{{ route('storeUser') }}">
+                            <form action="{{ route('storeUser') }}" method="post">
                                 @csrf
 
                                 <!-- Full Name -->

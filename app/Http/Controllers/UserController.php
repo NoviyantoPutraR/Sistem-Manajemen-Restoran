@@ -39,24 +39,18 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = validator($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:tbl_users',
             'role' => 'required|in:admin,manager,employee',
             'password' => 'required|string|min:8|confirmed',
-        ]);
+            ])->validate();
+
+            $tbl_users = new User($validatedData);
+            $tbl_users->save();
     
-        // Simpan data ke dalam database
-        User::create([
-            'name' => $request->full_name,
-            'email' => $request->email,
-            'role' => $request->role,
-            'password' => bcrypt($request->password),
-        ]);
-    
-        // Setelah menyimpan, alihkan pengguna atau lakukan tindakan lain yang sesuai
-        return redirect()->route('daftarUser')->with('success', 'Pengguna berhasil didaftarkan.');
-    } 
+            return redirect(route('daftarUser'))->with('success', 'Data Berhasil Ditambahkan');
+        }
     
     /**
      * Display the specified resource.
@@ -95,22 +89,22 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $tbl_users)
-    {
-        $validatedData = validator($request->all(), [
-            'name' => 'required',
-            'email' => 'required',
-            'role' => 'required',
-            'password' => 'required'
-        ])->validate();
+{
+    $validatedData = validator($request->all(), [
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:tbl_users',
+        'role' => 'required|in:admin,manager,employee',
+        'password' => 'required|string|min:8|confirmed',
+    ])->validate();
 
-        $tbl_users->name = $validatedData['name'];
-        $tbl_users->email = $validatedData['email'];
-        $tbl_users->role = $validatedData['role'];
-        $tbl_users->password = $validatedData['password'];
-        $tbl_users->save();
+    $tbl_users->name = $validatedData['name'];
+    $tbl_users->email = $validatedData['email'];
+    $tbl_users->role = $validatedData['role'];
+    $tbl_users->password = $validatedData['password'];
+    $tbl_users->save();
 
-        return redirect(route('daftarUser'))->with('success', 'Data Berhasil Di update');;
-    }
+    return redirect(route('daftarUser'))->with('success', 'Data Berhasil Di Update');;
+}
     
     /**
      * Remove the specified resource from storage.
@@ -121,6 +115,6 @@ class UserController extends Controller
     public function destroy(User $tbl_users)
     {
        $tbl_users->delete();
-       return redirect(route('daftarUser'))->with('succes', 'Data Berhasil Di Hapus');;
+       return redirect(route('daftarUser'))->with('success', 'Data Berhasil Di Hapus');;
     }
 }

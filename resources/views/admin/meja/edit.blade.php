@@ -40,11 +40,6 @@
                             @csrf
 
                             <div class="form-group">
-                                <label for="noMeja">Id</label><br>
-                                <input type="text" name="no_meja" class="form-control" id="noMeja" placeholder="Masukkan Nomor Meja" value="{{ $meja->no_meja ?? '' }}">
-                            </div>
-
-                            <div class="form-group">
                                 <label for="kapasitasMeja">Kapasitas Meja</label><br>
                                 <input type="text" name="kapasitas" class="form-control" id="kapasitasMeja" placeholder="Masukkan Kapasitas Meja" value="{{ $meja->kapasitas ?? '' }}">
                             </div>

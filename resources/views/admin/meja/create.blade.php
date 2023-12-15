@@ -28,10 +28,6 @@
                         <h4 class="card-title">Tambah Meja</h4><br>
                         <form method="POST" action="{{ route('storeMeja') }}" class="forms-sample" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-group">
-                                <label for="noMeja">Id</label><br>
-                                <input type="text" name="no_meja" class="form-control" id="noMeja" placeholder="Masukkan Nomor Meja">
-                            </div>
 
                             <div class="form-group">
                                 <label for="kapasitasMeja">Kapasitas Meja</label><br>
@@ -52,7 +48,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-gradient-primary me-2">Simpan</button>
-                            <a href="{{ route('daftarPelanggan') }}" class="btn btn-light">Batal</a>
+                            <a href="{{ route('daftarMeja') }}" class="btn btn-light">Batal</a>
                             </form>
                         </div>
                     </div>

@@ -36,7 +36,6 @@ class MejaController extends Controller
     public function store(Request $request)
     {
         $validatedData = validator($request->all(), [
-            'no_meja'=> 'required|string|max:255', 
             'kapasitas' => 'required',
             'status' => 'required',
             'terakhir_kunjungan' => 'required',
@@ -84,14 +83,11 @@ class MejaController extends Controller
 
     {
         $validatedData = validator($request->all(), [
-            'no_meja' => 'required|string|max:255',
             'kapasitas' => 'required',
             'status' => 'required',
             'terakhir_kunjungan' => 'required',
         ])->validated();
-        
 
-        $meja->no_meja = $validatedData['no_meja'];
         $meja->kapasitas = $validatedData['kapasitas'];
         $meja->status = $validatedData['status'];
         $meja->terakhir_kunjungan = $validatedData['terakhir_kunjungan'];

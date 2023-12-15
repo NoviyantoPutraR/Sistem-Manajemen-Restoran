@@ -49,8 +49,7 @@
                     <table class="table table-hover" id="data-table">
                         <thead>
                             <tr>
-                                <th>No.</th>
-                                <th>Id</th>
+                                <th>No.Meja</th>
                                 <th>Kapasitas Meja</th>
                                 <th>Status</th>
                                 <th>Terakhir Kunjungan</th>
@@ -61,8 +60,6 @@
                             @foreach ($mejas as $meja)
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
-
-                                    <td>{{ $meja->no_meja }}</td>
                                     <td>{{ $meja->kapasitas }}</td>
                                     <td>{{ $meja->status }}</td>
                                     <td>{{ \Carbon\Carbon::parse($meja->terakhir_kunjungan)->setTimezone('Asia/Jakarta')->translatedFormat('j M Y') }}

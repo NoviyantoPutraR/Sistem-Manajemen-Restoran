@@ -66,7 +66,7 @@
         <div class="collapse" id="general-pages">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="{{route('daftarMenu')}}"> Menu </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> Meja </a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{route('daftarMeja')}}"> Meja </a></li>
             
           </ul>
         </div>

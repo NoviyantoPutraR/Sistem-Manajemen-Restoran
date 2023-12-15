@@ -15,6 +15,7 @@ class CreateTblMenusTable extends Migration
     {
         Schema::create('tbl_menus', function (Blueprint $table) {
             $table->bigIncrements('id'); // Mengganti 'menu' dengan 'id'
+            $table->string('foto'); 
             $table->string('menu'); // Menambahkan kolom 'menu' sebagai nama menu
             $table->text('deskripsi')->nullable(); // Menambahkan kolom 'deskripsi' dan membiarkan nilainya dapat kosong
             $table->decimal('harga', 10, 2); // Menambahkan kolom 'harga' dengan 2 digit di belakang koma

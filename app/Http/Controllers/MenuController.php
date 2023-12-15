@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use App\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
+use Image;
 
 class MenuController extends Controller
 {
@@ -36,6 +39,7 @@ class MenuController extends Controller
     public function store(Request $request)
 {
     $validatedData = $request->validate([
+        'foto' => 'mimes:jpeg,png,jpg,gif,svg',// Atur sesuai kebutuhan Anda
         'menu' => 'required',
         'deskripsi' => 'required',
         'harga' => 'required',
@@ -43,7 +47,34 @@ class MenuController extends Controller
         'total_transaksi' => 'required',
     ]);
 
-    $menu = new Menu($validatedData);
+    // Upload dan resize foto
+    $file = $request->file('foto');
+    $name = 'FT' . date('Ymdhis') . '.' . $file->getClientOriginalExtension();
+    $directory = 'image/foto/';
+
+    // Membuat direktori jika belum ada
+    if (!is_dir(public_path($directory))) {
+        mkdir(public_path($directory), 0755, true);
+    }
+
+    $path = $directory . $name;
+
+    // Menyimpan dan meresize foto
+    $resize_foto = Image::make($file->getRealPath());
+    $resize_foto->resize(200, 200, function ($constraint) {
+        $constraint->aspectRatio();
+    })->save(public_path($path));
+
+    // Simpan data menu beserta nama file foto ke database
+    $menu = new Menu([
+        'foto' => 'image/foto/' . $name,
+        'menu' => $validatedData['menu'],
+        'deskripsi' => $validatedData['deskripsi'],
+        'harga' => $validatedData['harga'],
+        'total_item' => $validatedData['total_item'],
+        'total_transaksi' => $validatedData['total_transaksi'],
+    ]);
+
     $menu->save();
 
     return redirect()->route('daftarMenu')->with('success', 'Menu berhasil ditambahkan');
@@ -81,24 +112,52 @@ class MenuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Menu $menu)
-{
-    $validatedData = validator($request->all(), [
-        'menu' => 'required|string|max:255', // Change 'nama' to 'menu'
-        'deskripsi' => 'required|string', // Change 'deskripsi' to 'deks'
-        'harga' => 'required', 
-        'total_item' => 'required', // Change 'total item' to 'total_item'
-        'total_transaksi' => 'required', // Change 'total transaksi' to 'total_transaksi'
-    ])->validated();
+    {
+        $validator = Validator::make($request->all(), [
+            'foto' => 'mimes:jpeg,png,jpg,gif,svg',
+            'menu' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'harga' => 'required',
+            'total_item' => 'required',
+            'total_transaksi' => 'required',
+        ]);
 
-    $menu->menu = $validatedData['menu'];
-    $menu->deskripsi = $validatedData['deskripsi']; // Change 'deskripsi' to 'deks'
-    $menu->harga = $validatedData['harga'];
-    $menu->total_item = $validatedData['total_item']; // Change 'total item' to 'total_item'
-    $menu->total_transaksi = $validatedData['total_transaksi']; // Change 'total transaksi' to 'total_transaksi'
-    $menu->save();
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-    return redirect(route('daftarMenu'))->with('success', 'Data Berhasil Diupdate');
-}
+        if ($request->hasFile('foto')) {
+            if (File::exists(public_path($menu->foto))) {
+                File::delete(public_path($menu->foto));
+            }
+
+            $file = $request->file('foto');
+            $name = 'FT' . date('Ymdhis') . '.' . $file->getClientOriginalExtension();
+            $directory = 'image/foto/';
+
+            if (!is_dir(public_path($directory))) {
+                mkdir(public_path($directory), 0755, true);
+            }
+
+            $path = $directory . $name;
+
+            $resize_foto = Image::make($file->getRealPath());
+            $resize_foto->resize(200, 200, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path($path));
+
+            $menu->foto = $path;
+        }
+
+        $menu->menu = $request->input('menu');
+        $menu->deskripsi = $request->input('deskripsi');
+        $menu->harga = $request->input('harga');
+        $menu->total_item = $request->input('total_item');
+        $menu->total_transaksi = $request->input('total_transaksi');
+        $menu->save();
+
+        return redirect(route('daftarMenu'))->with('success', 'Data Berhasil Diupdate');
+    }
 
 
     /**

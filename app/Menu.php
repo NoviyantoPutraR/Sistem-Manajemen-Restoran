@@ -9,6 +9,7 @@ class Menu extends Model
     protected $table = 'tbl_menus';
 
     protected $fillable = [
+        'foto',
         'menu',
         'deskripsi',
         'harga',

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePelanggansTable extends Migration
+class CreateMejasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreatePelanggansTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_pelanggans', function (Blueprint $table) {
+        Schema::create('tbl_mejas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_pelanggan');
-            $table->string('email')->nullable();
+            $table->string('kapasitas');
+            $table->string('status');
             $table->timestamp('terakhir_kunjungan'); 
-            $table->decimal('total_transaksi'); // Menambahkan panjang dan presisi untuk decimal
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -31,6 +29,6 @@ class CreatePelanggansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_pelanggans');
+        Schema::dropIfExists('tbl_mejas');
     }
 }

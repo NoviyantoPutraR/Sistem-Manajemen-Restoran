@@ -11,6 +11,7 @@ class PembelianModel extends Model
 
     protected $fillable = [
         'kategori',
-        'total',
+        'total_item',
+        'total_nominal',
     ];
 }

@@ -48,7 +48,7 @@
                             <a href="{{ route('daftarPembelian') }}">Pengeluaran</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            <span>List Pembelian Bahan Baku</span>
+                            <span>List Pengeluaran Resto</span>
                         </li>
                     </ul>
                 </nav>
@@ -60,42 +60,38 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{ route('addPembelian') }}" class="btn btn-outline-info btn-fw"
-                                style="margin-bottom: 10px;" role="button">Tambah Pembelian</a>
-                            <h4 class="card-title text-center">Daftar Pembelian Bahan Baku</h4>
+                            <a href="{{ route('addPengeluaran') }}" class="btn btn-outline-info btn-fw"
+                                style="margin-bottom: 10px;" role="button">Tambah Pengeluaran</a>
+                            <h4 class="card-title text-center">Daftar Pengeluaran Resto</h4>
                             <div class="table-responsive">
-                                <table class="table table-hover table-striped text-center " id="data-table">
+                                <table class="table table-hover table-striped text-center" id="data-table">
                                     <thead>
                                         <tr>
-                                            <th>Id Pembelian</th>
-                                            <th>Kategori</th>
-                                            <th>Total Item</th>
+                                            <th>Id Pengeluaran</th>
+                                            <th>Jenis</th>
+                                            <th>Deskripsi</th>
                                             <th>Total Nominal</th>
-                                            <th>Waktu</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($tbl_pembelians as $tbl_pembelian)
+                                        @foreach ($tbl_pengeluarans as $pengeluaran)
                                             <tr>
-                                                <td>{{ $tbl_pembelian->id_pembelian }}</td>
-                                                <td>{{ $tbl_pembelian->kategori }}</td>
-                                                <td>{{ $tbl_pembelian->total_item }}</td>
-                                                <td>{{ number_format($tbl_pembelian->total_nominal, 0, ',', '.') }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($tbl_pembelian->created_at)->setTimezone('Asia/Jakarta')->translatedFormat('j M Y') }}
-                                                </td>
+                                                <td>{{ $pengeluaran->id_pengeluaran }}</td>
+                                                <td>{{ $pengeluaran->jenis }}</td>
+                                                <td>{{ $pengeluaran->deskripsi }}</td>
+                                                <td>{{ number_format($pengeluaran->total, 0, ',', '.') }}</td>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('editPembelian', ['id' => $tbl_pembelian->id_pembelian]) }}"
+                                                    <a href="{{ route('editPengeluaran', ['id' => $pengeluaran->id_pengeluaran]) }}"
                                                         class="btn btn-gradient-warning btn-sm" role="button">Edit</a>
                                                     <a onclick="confirmDelete(this)"
-                                                        data-url="{{ route('deletePembelian', ['id' => $tbl_pembelian->id_pembelian]) }}"
+                                                        data-url="{{ route('deletePengeluaran', ['id' => $pengeluaran->id_pengeluaran]) }}"
                                                         class="btn btn-gradient-danger btn-sm" role="button">Hapus</a>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
-
                                 </table>
                             </div>
                         </div>

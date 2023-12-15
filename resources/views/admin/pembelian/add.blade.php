@@ -8,11 +8,11 @@
 
             // Logika untuk menghitung total nominal berdasarkan kategori dan total item
             var hargaPerItem = getHargaPerItem(kategori);
-            var totalNominal = totalItem * hargaPerItem;
+            var totalNominal = Math.round(totalItem *
+                hargaPerItem); // Menggunakan Math.round untuk memastikan nilai integer
 
-            // Format totalNominal ke dalam format rupiah dengan titik sebagai pemisah ribuan
-            var formattedNominal = formatRupiah(totalNominal);
-
+            // Tampilkan nilai yang diformat ke dalam elemen dengan id 'txtTotalNominal'
+            var formattedNominal = (totalNominal);
             document.getElementById('txtTotalNominal').value = formattedNominal;
         }
 
@@ -22,19 +22,19 @@
         function getHargaPerItem(kategori) {
             // Ganti dengan logika atau database untuk mendapatkan harga per item berdasarkan kategori
             switch (kategori) {
-                case 'Daging':
+                case 'daging':
                     return 100000; // Harga per kilogram
-                case 'Seafood':
+                case 'seafood':
                     return 50000; // Harga per kilogram 
-                case 'Karbo':
+                case 'karbo':
                     return 25000;
-                case 'Sayur':
+                case 'sayur':
                     return 20000;
-                case 'Buah':
+                case 'buah':
                     return 18000;
-                case 'Bumbu':
+                case 'bumbu':
                     return 10000;
-                case 'Tepung':
+                case 'tepung':
                     return 14000;
                     // ... tambahkan kategori lainnya sesuai kebutuhan
                 default:
@@ -59,7 +59,7 @@
             // Tambahkan titik sebagai pemisah ribuan
             rupiah = rupiah.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
-            return prefix === undefined ? rupiah : rupiah ? +rupiah : '';
+            return prefix === undefined ? rupiah : prefix + rupiah;
         }
     </script>
 @endsection
@@ -71,7 +71,7 @@
             <div class="page-header">
                 <h3 class="page-title">
                     <span class="page-title-icon bg-gradient-primary text-white me-2">
-                        <i class="mdi mdi-home"></i>
+                        <i class="mdi mdi-currency-usd"></i>
                     </span>
                     Pengeluaran {{ Str::upper(Auth::user()->role) }}
                 </h3>
@@ -101,24 +101,25 @@
                                     <select name="kategori" class="form-control text-center" id="txtKategori"
                                         onchange="updateTotal()">
                                         <option value="none">-- Pilih kategori --</option>
-                                        <option value="Daging">Daging</option>
-                                        <option value="Seafood">Seafood</option>
-                                        <option value="Karbo">Karbo</option>
-                                        <option value="Sayur">Sayur</option>
-                                        <option value="Buah">Buah</option>
-                                        <option value="Bumbu">Bumbu</option>
-                                        <option value="Tepung">Tepung</option>
+                                        <option value="daging">Daging</option>
+                                        <option value="seafood">Seafood</option>
+                                        <option value="karbo">Karbo</option>
+                                        <option value="sayur">Sayur</option>
+                                        <option value="buah">Buah</option>
+                                        <option value="bumbu">Bumbu</option>
+                                        <option value="tepung">Tepung</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="txtTotalItem">TOTAL ITEM</label>
                                     <input type="int" class="form-control" id="txtTotalItem"
-                                        placeholder="Total Pembelian Item" onchange="updateTotal()">
+                                        placeholder="Total Pembelian Item" onchange="updateTotal()" name="total_item">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="txtTotalNominal">TOTAL NOMINAL (Rp)</label>
-                                    <input name="total" type="int" class="form-control" id="txtTotalNominal" readonly>
+                                    <input name="total_nominal" type="int" class="form-control" id="txtTotalNominal"
+                                        readonly>
                                 </div>
 
                                 <button type="submit" href="{{ route('storePembelian') }}"

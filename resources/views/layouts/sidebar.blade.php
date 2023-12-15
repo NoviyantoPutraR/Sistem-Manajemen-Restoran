@@ -21,6 +21,21 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="collapse" href="#basic" aria-expanded="false" aria-controls="basic">
+          <span class="menu-title">Pesanan Baru</span>
+          <i class="menu-arrow"></i>
+          <i class="mdi mdi-food-fork-drink menu-icon"></i>
+        </a>
+        <div class="collapse" id="basic">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="#">Dine In</a></li>           
+          </ul>
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="#">Take Home</a></li>           
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
           <span class="menu-title">Pengeluaran</span>
           <i class="menu-arrow"></i>
@@ -61,7 +76,7 @@
         <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
           <span class="menu-title">Data Master</span>
           <i class="menu-arrow"></i>
-          <i class="mdi mdi-food-fork-drink menu-icon"></i>
+          <i class="mdi mdi-table-large menu-icon"></i>
         </a>
         <div class="collapse" id="general-pages">
           <ul class="nav flex-column sub-menu">

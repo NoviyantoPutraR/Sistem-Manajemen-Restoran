@@ -119,30 +119,3 @@ Route::middleware(['auth'])->group(function () {
 // Route::post('/admin/pelanggan/{pelanggan}/edit', 'PelangganController@update')->name('updatePelanggan');
 // //route untuk menghapus pelanggan
 // Route::get('pelanggan/{pelanggan}/delete', 'PelangganController@destroy')->name('deletePelanggan');
-
-//meja
-Route::get('/admin/meja', 'MejaController@index')->name('daftarMeja');
-Route::get('/admin/meja/create', 'MejaController@create')->name('createMeja');
-Route::post('/admin/meja/create', 'MejaController@store')->name('storeMeja');
-//route untuk menampilkan view edit 
-Route::get('/admin/meja/{meja}/edit', 'MejaController@edit')->name('editMeja');
-//route untuk menyimpan perubahan , perhatikan bahwa fungsi routenya adalah post
-Route::post('/admin/meja/{meja}/edit', 'MejaController@update')->name('updateMeja');
-//route untuk menghapus meja
-Route::get('meja/{meja}/delete', 'MejaController@destroy')->name('deleteMeja');
-
-// pengeluaran
-Route::get('/admin/pengeluaran', 'PengeluaranController@index')->name('daftarPengeluaran');
-Route::get('/admin/Pengeluaran/add', 'PengeluaranController@create')->name('addPengeluaran');
-Route::post('/admin/Pengeluaran/add', 'PengeluaranController@store')->name('storePengeluaran');
-Route::get('/admin/Pengeluaran/{tbl_pengeluarans}/edit', 'PengeluaranController@edit')->name('editPengeluaran');
-Route::post('/admin/Pengeluaran/{tbl_pengeluarans}/edit', 'PengeluaranController@update')->name('updatePengeluaran');
-Route::get('/admin/Pengeluaran/{tbl_pengeluarans}/delete', 'PengeluaranController@destroy')->name('deletePengeluaran');
-
-// pesanan(Dine In)
-Route::get('/admin/pesanan', 'PesananController@index')->name('daftarPesanan');
-Route::get('/admin/Pesanan/add', 'PesananController@create')->name('addPesanan');
-Route::post('/admin/Pesanan/add', 'PesananController@store')->name('storePesanan');
-Route::get('/admin/Pesanan/{tbl_pesanans}/edit', 'PesananController@edit')->name('editPesanan');
-Route::post('/admin/Pesanan/{tbl_pesanans}/edit', 'PesananController@update')->name('updatePesanan');
-Route::get('/admin/Pesanan/{tbl_pesanans}/delete', 'PesananController@destroy')->name('deletePesanan');

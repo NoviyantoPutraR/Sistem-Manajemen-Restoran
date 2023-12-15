@@ -10,14 +10,14 @@ class Pelanggan extends Model
 
     protected $fillable = [
         'nama_pelanggan',
-        'email',
+        'metode_pembayaran',
+        'alamat',
+        'no_hp',
         'terakhir_kunjungan',
-        'total_transaksi',
     ];
 
     public function pelanggan()
-{
-return $this->belogsTo('App\Pelanggan', 'id_pelanggan');
-}
-
+    {
+        return $this->belongsTo('App\Pelanggan', 'id_pelanggan');
+    }
 }

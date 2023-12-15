@@ -19,7 +19,7 @@
           <span class="menu-title">Dashboard</span>
           <i class="mdi mdi-home menu-icon"></i>
         </a>
-      </li>
+      </li>      
       <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#basic" aria-expanded="false" aria-controls="basic">
           <span class="menu-title">Pesanan Baru</span>
@@ -76,7 +76,7 @@
         <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
           <span class="menu-title">Data Master</span>
           <i class="menu-arrow"></i>
-          <i class="mdi mdi-table-large menu-icon"></i>
+          <i class="mdi mdi-food-fork-drink menu-icon"></i>
         </a>
         <div class="collapse" id="general-pages">
           <ul class="nav flex-column sub-menu">

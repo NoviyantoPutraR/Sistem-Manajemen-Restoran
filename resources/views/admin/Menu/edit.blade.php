@@ -63,8 +63,14 @@
                     <div class="card">
                         <div class="card-body">
                         <h4 class="card-title">Edit Menu </h4><br>
-                            <form action="{{ route('updateMenu', ['id' => $menu->id]) }}" method="post">
+                            <form action="{{ route('updateMenu', ['id' => $menu->id]) }}" method="post" class="forms-sample" enctype="multipart/form-data">
                                 @csrf
+                                <div class="form-group">
+                                    <label for="foto">Foto</label><br>
+                                    <input type="file" name="foto" class="form-control" id="foto">
+                                    <img src="{{ asset($menu->foto) }}" alt="{{ $menu->menu }}" style="width: 100px;">
+                                </div>
+                                
                                 <div class="form-group">
                                     <label for="menuName">Menu</label><br>
                                     <input type="text" name="menu" class="form-control" id="menuName" placeholder="Masukkan Nama Menu" value="{{ $menu->menu ?? '' }}">

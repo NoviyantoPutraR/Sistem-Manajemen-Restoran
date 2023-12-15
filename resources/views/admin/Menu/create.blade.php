@@ -29,6 +29,17 @@
             var formatted = ribuan.join('.').split('').reverse().join('');
             return formatted;
         }
+
+        var readFoto = function(event) {
+            var input = event.target;
+            var reader = new FileReader();
+            reader.onload = function(){
+                var dataURL = reader.result;
+                var output = document.getElementById('output');
+                output.src = dataURL;
+            };
+            reader.readAsDataURL(input.files[0]);
+        };
     </script>
 @endsection
 
@@ -61,9 +72,15 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                        <h4 class="card-title">Tambah Menu </h4><br>
+                            <h4 class="card-title">Tambah Menu </h4><br>
                             <form method="POST" action="{{ route('storeMenu') }}" class="forms-sample" enctype="multipart/form-data">
                                 @csrf
+                                <div class="form-group">
+                                    <label for="foto">Foto</label><br>
+                                    <input type="file" onchange="readFoto(event)" name="foto" class="form-control" id="foto" placeholder="Masukkan Nama Menu">
+                                    <img id='output' style="width: 100px;">
+                                </div>
+                                
                                 <div class="form-group">
                                     <label for="menuName">Menu</label><br>
                                     <input type="text" name="menu" class="form-control" id="menuName" placeholder="Masukkan Nama Menu">

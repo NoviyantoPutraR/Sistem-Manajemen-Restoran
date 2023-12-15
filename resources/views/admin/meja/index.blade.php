@@ -14,7 +14,7 @@
             $("#data-table").DataTable();
         });
 
-        function confirmDelete(button) {
+        confirmDelete = function(button) {
             var url = $(button).data('url');
             swal({
                 title: 'Konfirmasi Hapus',
@@ -38,36 +38,38 @@
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
                     <i class="mdi mdi-food"></i>
                 </span>
-                Menu
+                List Meja
             </h3>
         </div>
 
         <div class="card">
             <div class="card-body">
-                <a href="{{ route('createPelanggan') }}" class="btn btn-outline-info btn-fw" style="margin-bottom: 10px;" role="button">Tambah Pelanggan</a>
+                <a href="{{ route('createMeja') }}" class="btn btn-outline-info btn-fw" style="margin-bottom: 10px;" role="button">Tambah Meja</a>
                 <div class="table-responsive">
                     <table class="table table-hover" id="data-table">
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Nama Pelanggan</th>
-                                <th>Email</th>
+                                <th>Id</th>
+                                <th>Kapasitas Meja</th>
+                                <th>Status</th>
                                 <th>Terakhir Kunjungan</th>
-                                <th>Total Transaksi</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($pelanggans as $pelanggan)
+                            @foreach ($mejas as $meja)
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ $pelanggan->nama_pelanggan }}</td>
-                                    <td>{{ $pelanggan->email }}</td>
-                                    <td>{{ $pelanggan->terakhir_kunjungan }}</td>
-                                    <td>{{ $pelanggan->total_transaksi }}</td>
+
+                                    <td>{{ $meja->no_meja }}</td>
+                                    <td>{{ $meja->kapasitas }}</td>
+                                    <td>{{ $meja->status }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($meja->terakhir_kunjungan)->setTimezone('Asia/Jakarta')->translatedFormat('j M Y') }}
                                     <td>
-                                        <a href="{{ route('editPelanggan', ['id' => $pelanggan->id]) }}" class="btn btn-gradient-warning btn-sm" role="button">Edit</a>
-                                        <a onclick="confirmDelete(this)" data-url="{{ route('deletePelanggan', ['id' => $pelanggan->id])}}" class="btn btn-gradient-danger btn-sm" role="button">Hapus</a>
+                                    <a href="{{ route('editMeja', ['id' => $meja->id]) }}" class="btn btn-gradient-warning btn-sm" role="button">Edit</a>
+                                    <a onclick="confirmDelete(this)" data-url="{{ route('deleteMeja', ['id' => $meja->id]) }}"
+                                            class="btn btn-gradient-danger btn-sm" role="button">Hapus</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -111,6 +111,10 @@ Route::middleware(['auth'])->group(function () {
 
 //meja
 Route::get('/admin/meja', 'MejaController@index')->name('daftarMeja');
+// monitor
+Route::get('/admin/mejam', 'MejaController@indexM')->name('daftarMejam');
+Route::post('/admin/mejam/{meja}/update', 'MejaController@updateM')->name('updateMejam');
+// monitor
 Route::get('/admin/meja/create', 'MejaController@create')->name('createMeja');
 Route::post('/admin/meja/create', 'MejaController@store')->name('storeMeja');
 //route untuk menampilkan view edit 

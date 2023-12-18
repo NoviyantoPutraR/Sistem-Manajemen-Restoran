@@ -21,6 +21,18 @@
             </a>
         </li>       
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('createPesanan') }}">
+                <span class="menu-title">Pesanan</span>
+                <i class="mdi mdi-home menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('daftarPesanan') }}">
+                <span class="menu-title">Pemesanan</span>
+                <i class="mdi mdi-home menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                 aria-controls="ui-basic">
                 <span class="menu-title">Pengeluaran</span>
@@ -82,7 +94,8 @@
             </a>
             <div class="collapse" id="ui">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('daftarUser') }}">Manajemen User</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('daftarUser') }}">Manajemen User</a>
+                    </li>
                 </ul>
             </div>
         </li>

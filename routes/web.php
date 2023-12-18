@@ -130,8 +130,9 @@ Route::get('/admin/Pengeluaran/{tbl_pengeluarans}/delete', 'PengeluaranControlle
 
 // pesanan(Dine In)
 Route::get('/admin/pesanan', 'PesananController@index')->name('daftarPesanan');
-Route::get('/admin/Pesanan/add', 'PesananController@create')->name('addPesanan');
-Route::post('/admin/Pesanan/add', 'PesananController@store')->name('storePesanan');
-Route::get('/admin/Pesanan/{tbl_pesanans}/edit', 'PesananController@edit')->name('editPesanan');
-Route::post('/admin/Pesanan/{tbl_pesanans}/edit', 'PesananController@update')->name('updatePesanan');
-Route::get('/admin/Pesanan/{tbl_pesanans}/delete', 'PesananController@destroy')->name('deletePesanan');
+Route::get('/admin/pesanan/pembayaran', 'PesananController@index')->name('pembayaranPesanan');
+Route::get('/admin/Pesanan/create', 'PesananController@create')->name('createPesanan');
+Route::post('/admin/Pesanan/create', 'PesananController@store')->name('storePesanan');
+Route::get('/admin/Pesanan/{pesanan}/edit', 'PesananController@edit')->name('editPesanan');
+Route::post('/admin/Pesanan/{pesanan}/update', 'PesananController@update')->name('updatePesanan');
+Route::get('/admin/Pesanan/{pesanan}/delete', 'PesananController@destroy')->name('deletePesanan');

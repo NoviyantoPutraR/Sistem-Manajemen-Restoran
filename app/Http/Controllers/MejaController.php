@@ -110,5 +110,5 @@ class MejaController extends Controller
     {
         $meja->delete();
         return redirect(route('daftarMeja'))->with('success', 'Data Berhasil Di hapus');;
-    }
+    }    
 }

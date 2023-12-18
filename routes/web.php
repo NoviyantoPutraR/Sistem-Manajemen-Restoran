@@ -136,3 +136,7 @@ Route::post('/admin/Pesanan/create', 'PesananController@store')->name('storePesa
 Route::get('/admin/Pesanan/{pesanan}/edit', 'PesananController@edit')->name('editPesanan');
 Route::post('/admin/Pesanan/{pesanan}/update', 'PesananController@update')->name('updatePesanan');
 Route::get('/admin/Pesanan/{pesanan}/delete', 'PesananController@destroy')->name('deletePesanan');
+
+//Meja
+Route::get('/admin/menotoring', 'MenotoringController@index')->name('daftarMenotoring');
+Route::post('/admin/menotoring/{tbl_mejas}/edit', 'MejaController@update2')->name('updateMenotoring');

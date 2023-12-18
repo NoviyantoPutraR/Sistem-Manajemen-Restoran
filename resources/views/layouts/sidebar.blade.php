@@ -49,13 +49,13 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="pages/icons/mdi.html">
-                <span class="menu-title">Icons</span>
+            <a class="nav-link" href="{{ route('daftarMenotoring') }}">
+                <span class="menu-title">Menotoring Meja</span>
                 <i class="mdi mdi-contacts menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="pages/forms/basic_elements.html">
+            <a class="nav-link" href="#">
                 <span class="menu-title">Forms</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a>

@@ -18,6 +18,12 @@ class MejaController extends Controller
         return view('admin.meja.index', ['mejas' => $mejas]);
     }
 
+    public function indexM()
+    {
+        $mejas = Meja::all(); // Ambil semua data menu
+        return view('admin.meja.monitor', ['mejas' => $mejas]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -97,6 +103,33 @@ class MejaController extends Controller
         $meja->save();
 
         return redirect(route('daftarMeja'))->with('success', 'Data Berhasil Diupdate');
+    }
+
+    public function updateM(Request $request, Meja $meja)
+
+    {
+        // $validatedData = validator($request->all(), [
+        //     'no_meja' => 'required',
+        //     'kapasitas' => 'required',
+        //     'status' => 'required',
+        //     'terakhir_kunjungan' => 'required',
+        // ])->validated();
+
+        // $meja->kapasitas = $validatedData['kapasitas'];
+        // $meja->status = $validatedData['status'];
+        // $meja->terakhir_kunjungan = $validatedData['terakhir_kunjungan'];
+        // $meja->save();
+
+        // return redirect(route('daftarMeja'))->with('success', 'Data Berhasil Diupdate');
+        $request->validate([
+            'status' => 'required|in:tidak tersedia,tersedia',
+        ]);
+
+        // $pesanan = Pesanan::findOrFail($pesanan);
+        $meja->status = $request['status'];
+        $meja->update(['status' => $request->status]);
+
+        return redirect()->route('daftarMejam')->with('success', 'Status Meja berhasil diperbarui');
     }
 
 

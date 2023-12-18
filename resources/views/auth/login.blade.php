@@ -1,17 +1,17 @@
 @push('scripts')
-        <script>
-            const passwordInput = document.getElementById('password');
-            const showPasswordButton = document.getElementById('show-password');
+    <script>
+        const passwordInput = document.getElementById('password');
+        const showPasswordButton = document.getElementById('show-password');
 
-            showPasswordButton.addEventListener('click', function() {
-                if (passwordInput.type === 'password') {
-                    passwordInput.type = 'text';
-                } else {
-                    passwordInput.type = 'password';
-                }
-            });
-        </script>
-    @endpush
+        showPasswordButton.addEventListener('click', function() {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        });
+    </script>
+@endpush
 
 <head>
     <!-- Meta tag yang diperlukan -->
@@ -36,6 +36,7 @@
     <!-- End gaya layout -->
     <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
 </head>
+
 <body>
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
@@ -43,18 +44,20 @@
                 <div class="row flex-grow">
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5">
-                        <div class="brand-logo text-center">
-    <h2 class="text-purple font-weight-bold">SISTEM MANAJEMEN</h2>
-    <h2 class="text-purple font-weight-bold">RESTORAN</h2>
-</div>
+                            <div class="brand-logo text-center">
+                                <h2 class="text-purple font-weight-bold">SISTEM MANAJEMEN</h2>
+                                <h2 class="text-purple font-weight-bold">RESTORAN</h2>
+                            </div>
                             <h4>Halo! Mari memulai</h4>
                             <h6 class="font-weight-light">Masuk untuk melanjutkan.</h6>
                             <form class="pt-3" action="{{ route('login') }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <div class="input-group mb-3">
-                                        <input type="email" class="form-control form-control-lg @error('email') is-invalid @enderror"
-                                            id="email" name="email" value="{{ old('email') }}" placeholder="Email" required autocomplete="email" autofocus>
+                                        <input type="email"
+                                            class="form-control form-control-lg @error('email') is-invalid @enderror"
+                                            id="email" name="email" value="{{ old('email') }}"
+                                            placeholder="Email" required autocomplete="email" autofocus>
                                         <div class="input-group-append input-group-text">
                                             <span class="fa fa-envelope"></span>
                                         </div>
@@ -67,8 +70,10 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group mb-3">
-                                        <input type="password" class="form-control form-control-lg @error('password') is-invalid @enderror"
-                                            id="password" name="password" placeholder="Kata Sandi" required autocomplete="current-password">
+                                        <input type="password"
+                                            class="form-control form-control-lg @error('password') is-invalid @enderror"
+                                            id="password" name="password" placeholder="Kata Sandi" required
+                                            autocomplete="current-password">
                                         <div class="input-group-append input-group-text">
                                             <span class="fa fa-lock"></span>
                                         </div>
@@ -94,7 +99,8 @@
                                 @endif
                                 @if (Route::has('register'))
                                     <p class="mb-0">
-                                        Belum punya akun? <a href="{{ route('register') }}" class="text-primary">Daftar sekarang</a>
+                                        Belum punya akun? <a href="{{ route('register') }}" class="text-primary">Daftar
+                                            sekarang</a>
                                     </p>
                                 @endif
                             </div>

@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
-use Image;
+use Intervention\Image\Facades\Image;
+
 
 class MenuController extends Controller
 {
@@ -17,7 +19,7 @@ class MenuController extends Controller
     public function index()
     {
         $menus = Menu::all(); // Ambil semua data menu
-    return view('admin.menu.index', ['menus' => $menus]);
+        return view('admin.menu.index', ['menus' => $menus]);
     }
 
     /**
@@ -37,48 +39,48 @@ class MenuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-{
-    $validatedData = $request->validate([
-        'foto' => 'mimes:jpeg,png,jpg,gif,svg',// Atur sesuai kebutuhan Anda
-        'menu' => 'required',
-        'deskripsi' => 'required',
-        'harga' => 'required',
-        'total_item' => 'required',
-        'total_transaksi' => 'required',
-    ]);
+    {
+        $validatedData = $request->validate([
+            'foto' => 'mimes:jpeg,png,jpg,gif,svg', // Atur sesuai kebutuhan Anda
+            'menu' => 'required',
+            'deskripsi' => 'required',
+            'harga' => 'required',
+            'total_item' => 'required',
+            'total_transaksi' => 'required',
+        ]);
 
-    // Upload dan resize foto
-    $file = $request->file('foto');
-    $name = 'FT' . date('Ymdhis') . '.' . $file->getClientOriginalExtension();
-    $directory = 'image/foto/';
+        // Upload dan resize foto
+        $file = $request->file('foto');
+        $name = 'FT' . date('Ymdhis') . '.' . $file->getClientOriginalExtension();
+        $directory = 'image/foto/';
 
-    // Membuat direktori jika belum ada
-    if (!is_dir(public_path($directory))) {
-        mkdir(public_path($directory), 0755, true);
+        // Membuat direktori jika belum ada
+        if (!is_dir(public_path($directory))) {
+            mkdir(public_path($directory), 0755, true);
+        }
+
+        $path = $directory . $name;
+
+        // Menyimpan dan meresize foto
+        $resize_foto = Image::make($file->getRealPath());
+        $resize_foto->resize(200, 200, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save(public_path($path));
+
+        // Simpan data menu beserta nama file foto ke database
+        $menu = new Menu([
+            'foto' => 'image/foto/' . $name,
+            'menu' => $validatedData['menu'],
+            'deskripsi' => $validatedData['deskripsi'],
+            'harga' => $validatedData['harga'],
+            'total_item' => $validatedData['total_item'],
+            'total_transaksi' => $validatedData['total_transaksi'],
+        ]);
+
+        $menu->save();
+
+        return redirect()->route('daftarMenu')->with('success', 'Menu berhasil ditambahkan');
     }
-
-    $path = $directory . $name;
-
-    // Menyimpan dan meresize foto
-    $resize_foto = Image::make($file->getRealPath());
-    $resize_foto->resize(200, 200, function ($constraint) {
-        $constraint->aspectRatio();
-    })->save(public_path($path));
-
-    // Simpan data menu beserta nama file foto ke database
-    $menu = new Menu([
-        'foto' => 'image/foto/' . $name,
-        'menu' => $validatedData['menu'],
-        'deskripsi' => $validatedData['deskripsi'],
-        'harga' => $validatedData['harga'],
-        'total_item' => $validatedData['total_item'],
-        'total_transaksi' => $validatedData['total_transaksi'],
-    ]);
-
-    $menu->save();
-
-    return redirect()->route('daftarMenu')->with('success', 'Menu berhasil ditambahkan');
-}
 
     /**
      * Display the specified resource.
@@ -172,4 +174,3 @@ class MenuController extends Controller
         return redirect(route('daftarMenu'))->with('success', 'Data Berhasil Di hapus');;
     }
 }
-

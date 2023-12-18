@@ -15,9 +15,10 @@ class CreateMejasTable extends Migration
     {
         Schema::create('tbl_mejas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('no_meja');
             $table->string('kapasitas');
             $table->string('status');
-            $table->timestamp('terakhir_kunjungan'); 
+            $table->timestamp('terakhir_kunjungan');
             $table->timestamps();
         });
     }

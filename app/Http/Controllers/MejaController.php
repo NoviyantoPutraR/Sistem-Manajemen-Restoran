@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Meja;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class MejaController extends Controller
     public function index()
     {
         $mejas = Meja::all(); // Ambil semua data menu
-    return view('admin.meja.index', ['mejas' => $mejas]);
+        return view('admin.meja.index', ['mejas' => $mejas]);
     }
 
     /**
@@ -36,6 +37,7 @@ class MejaController extends Controller
     public function store(Request $request)
     {
         $validatedData = validator($request->all(), [
+            'no_meja' => 'required',
             'kapasitas' => 'required',
             'status' => 'required',
             'terakhir_kunjungan' => 'required',
@@ -46,7 +48,7 @@ class MejaController extends Controller
 
         return redirect(route('daftarMeja'))->with('success', 'Data Berhasil Disimpan');
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -83,6 +85,7 @@ class MejaController extends Controller
 
     {
         $validatedData = validator($request->all(), [
+            'no_meja' => 'required',
             'kapasitas' => 'required',
             'status' => 'required',
             'terakhir_kunjungan' => 'required',

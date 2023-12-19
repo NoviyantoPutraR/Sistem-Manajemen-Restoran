@@ -1,5 +1,44 @@
 @extends('layouts.master')
 
+@section('addJavascript')
+<script>
+  const ctx = document.getElementById('myChart').getContext('2d');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+      datasets: [{
+        label: '#Pengeluaran',
+        backgroundColor : [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          
+        ],
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+@endsection
+
 @section('content')
         <div class="main-panel">
           <div class="content-wrapper">
@@ -86,14 +125,14 @@
                   <div class="card-body">
                     <div class="clearfix">
                       <h4 class="card-title float-left">
-                        Visit And Sales Statistics
+                        Pengeluaran
                       </h4>
                       <div
                         id="visit-sale-chart-legend"
                         class="rounded-legend legend-horizontal legend-top-right float-right"
                       ></div>
                     </div>
-                    <canvas id="visit-sale-chart" class="mt-4"></canvas>
+                    <canvas id="myChart"></canvas>
                   </div>
                 </div>
               </div>

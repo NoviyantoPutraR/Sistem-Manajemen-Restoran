@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+use App\Pelanggan;
+use App\Pengeluaran;
+use App\Pesanan;
 
 class DashboardController extends Controller
 {
@@ -23,6 +28,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $jumlahPengunjung = Pelanggan::count();
+        $totalPengeluaran = Pengeluaran::sum('total');
+        $totalTransaksi = Pesanan::sum('total_nominal');
+
+        return view('dashboard', compact('jumlahPengunjung', 'totalPengeluaran', 'totalTransaksi'));
     }
 }

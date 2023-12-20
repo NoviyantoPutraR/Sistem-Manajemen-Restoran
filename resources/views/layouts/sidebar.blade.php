@@ -19,20 +19,33 @@
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
-        </li>
+        </li>       
         <li class="nav-item">
             <a class="nav-link" href="{{ route('createPesanan') }}">
                 <span class="menu-title">Pesanan</span>
-                <i class="mdi mdi-cart-plus menu-icon"></i>
+                <i class="mdi mdi-clipboard-text menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('daftarPesanan') }}">
                 <span class="menu-title">Pemesanan</span>
-                <i class="mdi mdi-cart menu-icon"></i>
+                <i class="mdi mdi-food-fork-drink menu-icon"></i>
             </a>
         </li>
-
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false"
+                aria-controls="general-pages">
+                <span class="menu-title">Data Master</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-folder-multiple-outline menu-icon"></i>
+            </a>
+            <div class="collapse" id="general-pages">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('daftarMenu') }}"> Menu </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('daftarMeja') }}"> Meja </a></li>
+                </ul>
+            </div>
+        </li> 
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                 aria-controls="ui-basic">
@@ -50,24 +63,16 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false"
-                aria-controls="general-pages">
-                <span class="menu-title">Data Master</span>
-                <i class="menu-arrow"></i>
-                <i class="mdi mdi-food-fork-drink menu-icon"></i>
+            <a class="nav-link" href="{{ route('daftarMejam') }}">
+                <span class="menu-title">Menotoring Meja</span>
+                <i class="mdi mdi-monitor-multiple menu-icon"></i>
             </a>
-            <div class="collapse" id="general-pages">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('daftarMenu') }}"> Menu </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('daftarMeja') }}"> Meja </a></li>
-                </ul>
-            </div>
-        </li>
+        </li>                      
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui" aria-expanded="false" aria-controls="ui">
                 <span class="menu-title">Settings Resto</span>
                 <i class="menu-arrow"></i>
-                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                <i class="mdi mdi-tune menu-icon"></i>
             </a>
             <div class="collapse" id="ui">
                 <ul class="nav flex-column sub-menu">

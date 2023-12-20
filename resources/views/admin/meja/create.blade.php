@@ -45,8 +45,8 @@
                                 <div class="form-group">
                                     <label for="statusMeja">Status</label>
                                     <select name="status" class="form-control" id="statusMeja">
-                                        <option value="NotAvailable">Not Available</option>
-                                        <option value="Availabe">Available</option>
+                                        <option value="tidak tersedia">tidak tersedia</option>
+                                        <option value="tersedia">Tersedia</option>
                                     </select>
                                 </div>
 

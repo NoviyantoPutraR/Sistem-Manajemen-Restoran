@@ -111,6 +111,10 @@ Route::middleware(['auth'])->group(function () {
 
 //meja
 Route::get('/admin/meja', 'MejaController@index')->name('daftarMeja');
+// monitor
+Route::get('/admin/mejam', 'MejaController@indexM')->name('daftarMejam');
+Route::post('/admin/mejam/{meja}/update', 'MejaController@updateM')->name('updateMejam');
+// monitor
 Route::get('/admin/meja/create', 'MejaController@create')->name('createMeja');
 Route::post('/admin/meja/create', 'MejaController@store')->name('storeMeja');
 //route untuk menampilkan view edit 
@@ -136,3 +140,8 @@ Route::post('/admin/Pesanan/create', 'PesananController@store')->name('storePesa
 Route::get('/admin/Pesanan/{pesanan}/edit', 'PesananController@edit')->name('editPesanan');
 Route::post('/admin/Pesanan/{pesanan}/update', 'PesananController@update')->name('updatePesanan');
 Route::get('/admin/Pesanan/{pesanan}/delete', 'PesananController@destroy')->name('deletePesanan');
+
+
+//Meja
+Route::get('/admin/menotoring', 'MenotoringController@index')->name('daftarMenotoring');
+Route::post('/admin/menotoring/{tbl_mejas}/edit', 'MejaController@update2')->name('updateMenotoring');

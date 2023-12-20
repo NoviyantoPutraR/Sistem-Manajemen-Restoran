@@ -36,7 +36,7 @@
         <div class="page-header">
             <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
-                    <i class="mdi mdi-food"></i>
+                    <i class="mdi mdi-monitor-multiple menu-icon"></i>
                 </span>
                 List Meja
             </h3>

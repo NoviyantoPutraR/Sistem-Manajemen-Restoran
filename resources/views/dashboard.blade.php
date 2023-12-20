@@ -37,7 +37,7 @@
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
         ],
-        data: [120000, 50000, 123000, 20000, 13000, 50000, 120000, 50000, 123000, 20000, 13000, 50000],
+        data: [],
         borderWidth: 1
       }]
     },
@@ -50,7 +50,23 @@
     }
   });
 
-  fetchData();
+  async function fetchData() {
+      try {
+        const response = await fetch('url_ke_endpoint_api_pengeluaran');
+        const data = await response.json();
+
+        // Update chart data
+        myChart.data.datasets[0].data = data.pengeluaran;
+        myChart.update();
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    // Fetch data on page load
+    fetchData();
+
+  
 </script>
 
 @endsection
@@ -85,9 +101,12 @@
                         <div class="float-end">
                           <p class="mb-0 text-right">Pengunjung</p>
                           <div class="fluid-container">
-                            <h3 class="font-weight-medium text-right mb-0">50</h3>
+                            <h3 class="font-weight-medium text-right mb-0">
+                              {{ $jumlahPengunjung ?? 'belum tersedia' }}
+                            </h3>
                           </div>
                         </div>
+                        
                       </div>
                     </div>
                   </div>
@@ -103,7 +122,13 @@
                         <div class="float-end">
                           <p class="mb-0 text-right">Pengeluaran</p>
                           <div class="fluid-container">
-                            <h3 class="font-weight-medium text-right mb-0">Rp120.000</h3>
+                            <h3 class="font-weight-medium text-right mb-0">
+                            @isset($totalPengeluaran)
+                            Rp{{ number_format($totalPengeluaran, 0, ',', '.') }}
+                            @else
+                            Data tidak tersedia
+                            @endisset
+                            </h3>
                           </div>
                         </div>
                       </div>
@@ -121,7 +146,13 @@
                         <div class="float-end">
                           <p class="mb-0 text-right">Total Transaksi</p>
                           <div class="fluid-container">
-                            <h4 class="font-weight-medium text-right mb-0">Rp1.220.000</h4>
+                            <h4 class="font-weight-medium text-right mb-0">
+                              @isset($totalTransaksi)
+                              Rp{{ number_format($totalTransaksi, 0, ',', '.') }}
+                              @else
+                              Data tidak tersedia
+                              @endisset
+                          </h4>
                           </div>
                         </div>
                       </div>

@@ -123,11 +123,15 @@
                           <p class="mb-0 text-right">Pengeluaran</p>
                           <div class="fluid-container">
                             <h3 class="font-weight-medium text-right mb-0">
-                            @isset($totalPengeluaran)
-                            Rp{{ number_format($totalPengeluaran, 0, ',', '.') }}
-                            @else
-                            Data tidak tersedia
-                            @endisset
+                            @php
+    $sumTotal = $totalPengeluaran + $totalPembelianBB;
+@endphp
+
+@isset($sumTotal)
+    Rp{{ number_format($sumTotal, 0, ',', '.') }}
+@else
+    Data tidak tersedia
+@endisset
                             </h3>
                           </div>
                         </div>

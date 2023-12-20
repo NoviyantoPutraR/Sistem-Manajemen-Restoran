@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Pelanggan;
+use App\PembelianModel;
 use App\Pengeluaran;
 use App\Pesanan;
 
@@ -31,7 +32,11 @@ class DashboardController extends Controller
         $jumlahPengunjung = Pelanggan::count();
         $totalPengeluaran = Pengeluaran::sum('total');
         $totalTransaksi = Pesanan::sum('total_nominal');
+        $totalPembelianBB = PembelianModel::sum('total_nominal');
 
-        return view('dashboard', compact('jumlahPengunjung', 'totalPengeluaran', 'totalTransaksi'));
+
+        return view('dashboard', compact('jumlahPengunjung', 'totalPengeluaran', 'totalTransaksi', 'totalPembelianBB'));
+
+
     }
 }

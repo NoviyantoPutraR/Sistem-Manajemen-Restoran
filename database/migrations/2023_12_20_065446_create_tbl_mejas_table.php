@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMejasTable extends Migration
+class CreateTblMejasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,6 @@ class CreateMejasTable extends Migration
             $table->integer('no_meja');
             $table->string('kapasitas');
             $table->string('status');
-            $table->timestamp('terakhir_kunjungan');
             $table->timestamps();
         });
     }

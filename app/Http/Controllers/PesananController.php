@@ -50,7 +50,8 @@ class PesananController extends Controller
             'nama_pelanggan' => 'required',
             'status_pembayaran' => 'required|in:lunas,belum lunas',
             'status_pesanan' => 'required|in:belum diproses,sedang diproses,selesai',
-            'menu_id' => 'required|exists:tbl_menus,id',
+            'menu_id' => 'required|array', // Ubah validasi menjadi array
+            'menu_id.*' => 'exists:tbl_menus,id', // Validasi setiap elemen dalam array
             'meja_id' => 'required|exists:tbl_mejas,id',
             'total_items' => 'required|integer|min:1',
             'total_nominal' => 'required|numeric|min:0',
@@ -63,8 +64,19 @@ class PesananController extends Controller
         // Set kode invoice dengan format INV-XXXXXXX
         $request->merge(['kode_invoice' => 'INV-' . Str::random(7)]);
 
-        // Simpan pesanan ke dalam database
-        Pesanan::create($request->all());
+        $menuItems = $request->input('menu_id');
+        $jsonMenuItems = json_encode($menuItems);
+
+        Pesanan::create([
+            'kode_invoice' => $request->input('kode_invoice'),
+            'nama_pelanggan' => $request->input('nama_pelanggan'),
+            'status_pembayaran' => $request->input('status_pembayaran'),
+            'status_pesanan' => $request->input('status_pesanan'),
+            'menu_items' => $jsonMenuItems,
+            'meja_id' => $request->input('meja_id'),
+            'total_items' => $request->input('total_items'),
+            'total_nominal' => $request->input('total_nominal'),
+        ]);
 
         return redirect()->route('daftarPesanan')->with('success', 'Pesanan berhasil ditambahkan.');
     }

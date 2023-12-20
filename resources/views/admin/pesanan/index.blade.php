@@ -103,7 +103,7 @@
                                             <th>Nama Pelanggan</th>
                                             <th>Status Pembayaran</th>
                                             <th>Status Pesanan</th>
-                                            <th>Menu</th>
+                                            <th>Menu Yg dipesan</th>
                                             <th>Meja</th>
                                             <th>Total Yg dipesan</th>
                                             <th>Total Pembayaran</th>
@@ -140,10 +140,15 @@
                                                             class="badge badge-success">{{ $pesanan->status_pesanan }}</span>
                                                     @endif
                                                 </td>
-                                                <td>{{ $pesanan->menu->menu }}</td>
+                                                <td>
+                                                    @foreach (json_decode($pesanan->menu_items) as $menuId)
+                                                        {{ App\Menu::find($menuId)->menu }}
+                                                        <br>
+                                                    @endforeach
+                                                </td>
                                                 <td>{{ $pesanan->meja->no_meja }}</td>
                                                 <td>{{ $pesanan->total_items }}</td>
-                                                <td>{{ $pesanan->total_nominal }}</td>
+                                                <td>{{ number_format($pesanan->total_nominal, 0, ',', '.') }}</td>
                                                 <td>
                                                     <form class="update-form" method="POST"
                                                         data-pesanan-id="{{ $pesanan->id }}"

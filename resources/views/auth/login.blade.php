@@ -17,7 +17,7 @@
     <!-- Meta tag yang diperlukan -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login</title>>
+    <title>Login</title>
     <style>
         .text-purple {
             color: #bf77f6
@@ -86,7 +86,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12 text-center">
-                                        <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
+                                        <button type="submit"
+                                            class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Masuk</button>
                                     </div>
                                 </div>
                             </form>

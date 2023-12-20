@@ -23,6 +23,13 @@ class PesananController extends Controller
         return view('admin.pesanan.index', compact('pesanans'));
     }
 
+    public function pembayaran()
+    {
+        $pesanans = Pesanan::all();
+        // return view('admin.pesanan.index', compact('pesananDineIns'));
+        return view('admin.pesanan.pembayaran', compact('pesanans'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

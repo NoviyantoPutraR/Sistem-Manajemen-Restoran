@@ -19,16 +19,22 @@
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
-        </li>       
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('daftarMejam') }}">
+                <span class="menu-title">Menotoring Meja</span>
+                <i class="mdi mdi-monitor-multiple menu-icon"></i>
+            </a>
+        </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('createPesanan') }}">
-                <span class="menu-title">Pesanan</span>
+                <span class="menu-title">Tambah Pesanan</span>
                 <i class="mdi mdi-clipboard-text menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('daftarPesanan') }}">
-                <span class="menu-title">Pemesanan</span>
+                <span class="menu-title">Monitor Pesanan</span>
                 <i class="mdi mdi-food-fork-drink menu-icon"></i>
             </a>
         </li>
@@ -45,7 +51,7 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('daftarMeja') }}"> Meja </a></li>
                 </ul>
             </div>
-        </li> 
+        </li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                 aria-controls="ui-basic">
@@ -62,12 +68,7 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('daftarMejam') }}">
-                <span class="menu-title">Menotoring Meja</span>
-                <i class="mdi mdi-monitor-multiple menu-icon"></i>
-            </a>
-        </li>                      
+
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui" aria-expanded="false" aria-controls="ui">
                 <span class="menu-title">Settings Resto</span>

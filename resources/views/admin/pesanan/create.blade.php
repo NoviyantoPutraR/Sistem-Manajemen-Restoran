@@ -2,33 +2,36 @@
 
 @section('addJavascript')
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            var totalItemsInput = document.getElementById('total_items');
-            var totalNominalInput = document.getElementById('total_nominal');
+        function updateQuantity(menuId, change) {
+            const quantityInput = document.querySelector('.menu-quantity-' + menuId);
+            const harga = parseFloat(quantityInput.getAttribute('data-harga'));
+            let currentQuantity = parseInt(quantityInput.value);
 
-            checkboxes.forEach(function(checkbox) {
-                checkbox.addEventListener('change', function() {
-                    calculateTotal();
-                });
+            currentQuantity += change;
+
+            if (currentQuantity < 0) {
+                currentQuantity = 0;
+            }
+
+            quantityInput.value = currentQuantity;
+            updateTotal();
+        }
+
+        function updateTotal() {
+            let totalItems = 0;
+            let totalNominal = 0;
+
+            document.querySelectorAll('.menu-item').forEach(item => {
+                const quantity = parseInt(item.querySelector('.form-control').value);
+                totalItems += quantity;
+                totalNominal += quantity * parseFloat(item.querySelector('.form-control').getAttribute(
+                    'data-harga'));
             });
 
-            function calculateTotal() {
-                var totalItems = 0;
-                var totalNominal = 0;
-
-                checkboxes.forEach(function(checkbox) {
-                    if (checkbox.checked) {
-                        var hargaMenu = parseFloat(checkbox.getAttribute('data-harga'));
-                        totalItems++;
-                        totalNominal += hargaMenu;
-                    }
-                });
-
-                totalItemsInput.value = totalItems;
-                totalNominalInput.value = totalNominal;
-            }
-        });
+            // Menampilkan total item dan total harga
+            document.getElementById('total_items').value = totalItems;
+            document.getElementById('total_nominal').value = totalNominal;
+        }
     </script>
 @endsection
 
@@ -75,19 +78,6 @@
                                     <label for="customer_name">Nama Pelanggan:</label>
                                     <input type="text" name="nama_pelanggan" class="form-control" required>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="menu_id">Pilih Menu:</label>
-                                    @foreach ($menus as $menu)
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="menu_id[]"
-                                                value="{{ $menu->id }}" data-harga="{{ $menu->harga }}">
-                                            <label class="form-check-label">{{ $menu->menu }} -
-                                                {{ $menu->harga }}</label>
-                                        </div>
-                                    @endforeach
-                                </div>
-
                                 <div class="form-group">
                                     <label for="meja_id">Pilih Meja</label>
                                     <select name="meja_id" class="form-control" required>
@@ -97,7 +87,34 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="menu_id">Pilih Menu:</label>
+                                    @foreach ($menus as $menu)
+                                        <div class="form-group menu-item">
+                                            <input type="hidden" name="menu_id[]" value="{{ $menu->id }}">
+                                            <label>{{ $menu->menu }} - {{ $menu->harga }}</label>
+                                            <div class="input-group">
+                                                <button type="button" class="btn btn-sm btn-minus"
+                                                    onclick="updateQuantity('{{ $menu->id }}', -1)">-</button>
+                                                <input class="form-control menu-quantity-{{ $menu->id }}"
+                                                    type="number" name="menu_quantity[]" value="0"
+                                                    data-harga="{{ $menu->harga }}" readonly>
+                                                <button type="button" class="btn btn-sm btn-plus"
+                                                    onclick="updateQuantity('{{ $menu->id }}', 1)">+</button>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="form-group">
+                                    <label for="total_items">Total Menu yang dipesan:</label>
+                                    <input type="text" name="total_items" id="total_items" class="form-control" readonly>
+                                </div>
 
+                                <div class="form-group">
+                                    <label for="total_nominal">Total harga:</label>
+                                    <input type="text" name="total_nominal" id="total_nominal" class="form-control"
+                                        readonly>
+                                </div>
                                 <div class="form-group">
                                     <label for="status_pembayaran">Status Pembayaran:</label>
                                     <select name="status_pembayaran" class="form-control" required>
@@ -115,16 +132,6 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="total_items">Total Menu yang dipesan:</label>
-                                    <input type="number" name="total_items" id="total_items" class="form-control" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="total_nominal">Total harga:</label>
-                                    <input type="number" name="total_nominal" id="total_nominal" class="form-control"
-                                        step="0.01" readonly>
-                                </div>
 
                                 <button type="submit" class="btn btn-gradient-primary me-2">Simpan</button>
                                 <a href="{{ route('daftarMenu') }}" class="btn btn-light">Batal</a>

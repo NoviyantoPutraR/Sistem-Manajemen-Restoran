@@ -1,74 +1,74 @@
 @extends('layouts.master')
 
 @section('addJavascript')
-    <script>
-        const ctx = document.getElementById('myChart').getContext('2d');
+<script>
+  const ctx = document.getElementById('myChart').getContext('2d');
 
-        async function fetchData() {
-            try {
-                const response = await fetch(
-                    'url_ke_endpoint_api_pengeluaran'); // Ganti dengan URL API atau endpoint yang sesuai
-                const data = await response.json();
+  async function fetchData() {
+    try {
+      const response = await fetch('url_ke_endpoint_api_pengeluaran'); // Ganti dengan URL API atau endpoint yang sesuai
+      const data = await response.json();
 
-                // Memperbarui data chart dengan data yang diambil dari database
-                myChart.data.datasets[0].data = data.pengeluaran;
-                myChart.update(); // Mengupdate chart setelah data diubah
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
+      // Memperbarui data chart dengan data yang diambil dari database
+      myChart.data.datasets[0].data = data.pengeluaran;
+      myChart.update(); // Mengupdate chart setelah data diubah
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+      datasets: [{
+        label: '#Pengeluaran',
+        backgroundColor : [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+        ],
+        data: [],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
         }
+      }
+    }
+  });
 
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September',
-                    'Oktober', 'November', 'Desember'
-                ],
-                datasets: [{
-                    label: '#Pengeluaran',
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                    ],
-                    data: [],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+  async function fetchData() {
+      try {
+        const response = await fetch('url_ke_endpoint_api_pengeluaran');
+        const data = await response.json();
 
-        async function fetchData() {
-            try {
-                const response = await fetch('url_ke_endpoint_api_pengeluaran');
-                const data = await response.json();
+        // Update chart data
+        myChart.data.datasets[0].data = data.pengeluaran;
+        myChart.update();
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
 
-                // Update chart data
-                myChart.data.datasets[0].data = data.pengeluaran;
-                myChart.update();
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
+    // Fetch data on page load
+    fetchData();
 
-        // Fetch data on page load
-        fetchData();
-    </script>
+  
+</script>
+
 @endsection
 
 @section('content')
@@ -90,133 +90,78 @@
                     </ul>
                 </nav>
             </div>
-
             <div class="row">
-                <div class="col-md-4 stretch-card grid-margin">
-                    <div class="card bg-gradient-danger card-img-holder text-white">
-                        <div class="card-body">
-                            <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                            <h4 class="font-weight-normal mb-3">Pengunjung <i
-                                    class="mdi mdi-account-multiple-plus mdi-24px float-right"></i>
-                            </h4>
-                            <h3 class="font-weight-medium text-right mb-0">
-                                {{ $jumlahPengunjung ?? 'belum tersedia' }}
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 stretch-card grid-margin">
-                    <div class="card bg-gradient-info card-img-holder text-white">
-                        <div class="card-body">
-                            <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                            <h4 class="font-weight-normal mb-3">Pengeluaran <i
-                                    class="mdi mdi-book-minus mdi-24px float-right"></i>
-                            </h4>
-                            <h3 class="font-weight-medium text-right mb-0">
-                                @php
-                                    $sumTotal = $totalPengeluaran + $totalPembelianBB;
-                                @endphp
-
-                                @isset($sumTotal)
-                                    Rp{{ number_format($sumTotal, 0, ',', '.') }}
-                                @else
-                                    Data tidak tersedia
-                                @endisset
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 stretch-card grid-margin">
-                    <div class="card bg-gradient-success card-img-holder text-white">
-                        <div class="card-body">
-                            <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                            <h4 class="font-weight-normal mb-3">Total Transaksi <i
-                                    class="mdi mdi-cash-usd mdi-24px float-right"></i>
-                            </h4>
-                            <h4 class="font-weight-medium text-right mb-0">
-                                @isset($totalTransaksi)
-                                    Rp{{ number_format($totalTransaksi, 0, ',', '.') }}
-                                @else
-                                    Data tidak tersedia
-                                @endisset
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- <div class="row">
                 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-                    <div class="card card-statistics">
-                        <div class="card-body">
-                            <div class="clearfix">
-                                <div class="float-start">
-                                    <i class="mdi mdi-account-multiple-plus text-danger icon-lg"></i>
-                                </div>
-                                <div class="float-end">
-                                    <p class="mb-0 text-right">Pengunjung</p>
-                                    <div class="fluid-container">
-                                        <h3 class="font-weight-medium text-right mb-0">
-                                            {{ $jumlahPengunjung ?? 'belum tersedia' }}
-                                        </h3>
-                                    </div>
-                                </div>
-
-                            </div>
+                  <div class="card card-statistics">
+                    <div class="card-body">
+                      <div class="clearfix">
+                        <div class="float-start">
+                          <i class="mdi mdi-account-multiple-plus text-danger icon-lg"></i>
                         </div>
+                        <div class="float-end">
+                          <p class="mb-0 text-right">Pengunjung</p>
+                          <div class="fluid-container">
+                            <h3 class="font-weight-medium text-right mb-0">
+                              {{ $jumlahPengunjung ?? 'belum tersedia' }}
+                            </h3>
+                          </div>
+                        </div>
+                        
+                      </div>
                     </div>
+                  </div>
                 </div>
 
                 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-                    <div class="card card-statistics">
-                        <div class="card-body">
-                            <div class="clearfix">
-                                <div class="float-start">
-                                    <i class="mdi mdi-book-minus text-danger icon-lg"></i>
-                                </div>
-                                <div class="float-end">
-                                    <p class="mb-0 text-right">Pengeluaran</p>
-                                    <div class="fluid-container">
-                                        <h3 class="font-weight-medium text-right mb-0">
-                                            @php
-                                                $sumTotal = $totalPengeluaran + $totalPembelianBB;
-                                            @endphp
-
-                                            @isset($sumTotal)
-                                                Rp{{ number_format($sumTotal, 0, ',', '.') }}
-                                            @else
-                                                Data tidak tersedia
-                                            @endisset
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
+                  <div class="card card-statistics">
+                    <div class="card-body">
+                      <div class="clearfix">
+                        <div class="float-start">
+                          <i class="mdi mdi-book-minus text-danger icon-lg"></i>
                         </div>
+                        <div class="float-end">
+                          <p class="mb-0 text-right">Pengeluaran</p>
+                          <div class="fluid-container">
+                            <h3 class="font-weight-medium text-right mb-0">
+                            @php
+    $sumTotal = $totalPengeluaran + $totalPembelianBB;
+@endphp
+
+@isset($sumTotal)
+    Rp{{ number_format($sumTotal, 0, ',', '.') }}
+@else
+    Data tidak tersedia
+@endisset
+                            </h3>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
 
                 <div class="col-lg-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-                    <div class="card card-statistics">
-                        <div class="card-body">
-                            <div class="clearfix">
-                                <div class="float-start">
-                                    <i class="mdi mdi-cash-usd text-danger icon-lg"></i>
-                                </div>
-                                <div class="float-end">
-                                    <p class="mb-0 text-right">Total Transaksi</p>
-                                    <div class="fluid-container">
-                                        <h4 class="font-weight-medium text-right mb-0">
-                                            @isset($totalTransaksi)
-                                                Rp{{ number_format($totalTransaksi, 0, ',', '.') }}
-                                            @else
-                                                Data tidak tersedia
-                                            @endisset
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
+                  <div class="card card-statistics">
+                    <div class="card-body">
+                      <div class="clearfix">
+                        <div class="float-start">
+                          <i class="mdi mdi-cash-usd text-danger icon-lg"></i>
                         </div>
+                        <div class="float-end">
+                          <p class="mb-0 text-right">Total Transaksi</p>
+                          <div class="fluid-container">
+                            <h4 class="font-weight-medium text-right mb-0">
+                              @isset($totalTransaksi)
+                              Rp{{ number_format($totalTransaksi, 0, ',', '.') }}
+                              @else
+                              Data tidak tersedia
+                              @endisset
+                          </h4>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
 
 
@@ -227,16 +172,18 @@
             <div class="row">
                 <div class="col-md-8 grid-margin stretch-card">
                     <div class="card">
-                        <div class="card-body">
-                            <div class="clearfix">
-                                <h4 class="card-title float-left">
-                                    Pengeluaran
-                                </h4>
-                                <div id="visit-sale-chart-legend"
-                                    class="rounded-legend legend-horizontal legend-top-right float-right"></div>
-                            </div>
-                            <canvas id="myChart"></canvas>
+                    <div class="card-body">
+                        <div class="clearfix">
+                        <h4 class="card-title float-left">
+                            Pengeluaran
+                        </h4>
+                        <div
+                            id="visit-sale-chart-legend"
+                            class="rounded-legend legend-horizontal legend-top-right float-right"
+                        ></div>
                         </div>
+                        <canvas id="myChart"></canvas>
+                    </div>
                     </div>
                 </div>
             </div>

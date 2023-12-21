@@ -30,6 +30,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     })->name('adminDashboard');
 });
 
+Route::get('/api/months', 'DropdownController@getMonths');
+
+
 Route::get('/admin/pembelian', 'PembelianController@index')->name('daftarPembelian');
 Route::get('/admin/pemesanan', 'PemesananController@index')->name('daftarPemesanan');
 Route::get('/admin/pemesanan/{tbl_pembelian}/delete', 'PemesananController@destroy')->name('deletePemesanan');

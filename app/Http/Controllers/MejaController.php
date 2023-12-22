@@ -108,19 +108,15 @@ class MejaController extends Controller
     public function updateM(Request $request, Meja $meja)
 
     {
+        // dd($request->all());
         $validatedData = validator($request->all(), [
-            'no_meja' => 'required',
-            'kapasitas' => 'required',
             'status' => 'required',
-            'terakhir_kunjungan' => 'required',
         ])->validated();
 
-        $meja->kapasitas = $validatedData['kapasitas'];
         $meja->status = $validatedData['status'];
-        $meja->terakhir_kunjungan = $validatedData['terakhir_kunjungan'];
         $meja->save();
 
-        return redirect(route('daftarMeja'))->with('success', 'Data Berhasil Diupdate');
+        return redirect(route('daftarMejam'))->with('success', 'Status Meja Berhasil Diupdate');
         $request->validate([
             'status' => 'required|in:tidak tersedia,tersedia',
         ]);
@@ -143,5 +139,5 @@ class MejaController extends Controller
     {
         $meja->delete();
         return redirect(route('daftarMeja'))->with('success', 'Data Berhasil Di hapus');;
-    }    
+    }
 }

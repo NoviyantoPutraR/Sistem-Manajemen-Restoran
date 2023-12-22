@@ -85,7 +85,7 @@ class PesananController extends Controller
             'total_nominal' => $request->input('total_nominal'),
         ]);
 
-        return redirect()->route('pembayaranPesanan')->with('success', 'Pesanan berhasil ditambahkan.');
+        return redirect()->route('pembayaranPesanan')->with('success', 'Pesanan berhasil ditambahkan dan lanjut Ke Pembayaran.');
     }
 
     /**
@@ -143,7 +143,7 @@ class PesananController extends Controller
         // return response()->json(['message' => 'Status Pesanan diperbarui.']);
     }
 
-    public function pembayaran(Request $request, Pesanan $pesanan)
+    public function pembayaranedit(Request $request, Pesanan $pesanan)
     {
         $request->validate([
             'status_pesanan' => 'required|in:belum diproses,sedang diproses,selesai',

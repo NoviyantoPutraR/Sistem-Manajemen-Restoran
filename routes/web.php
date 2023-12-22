@@ -138,6 +138,7 @@ Route::get('/admin/Pengeluaran/{tbl_pengeluarans}/delete', 'PengeluaranControlle
 // pesanan(Dine In)
 Route::get('/admin/pesanan', 'PesananController@index')->name('daftarPesanan');
 Route::get('/admin/pesanan/pembayaran', 'PesananController@pembayaran')->name('pembayaranPesanan');
+Route::post('/admin/Pesanan/{pesanan}/update', 'PesananController@pembayaranupdate')->name('updatePembayaran');
 Route::get('/admin/Pesanan/create', 'PesananController@create')->name('createPesanan');
 Route::post('/admin/Pesanan/create', 'PesananController@store')->name('storePesanan');
 Route::get('/admin/Pesanan/{pesanan}/edit', 'PesananController@edit')->name('editPesanan');
@@ -148,4 +149,3 @@ Route::get('/admin/Pesanan/{pesanan}/delete', 'PesananController@destroy')->name
 //Meja
 Route::get('/admin/menotoring', 'MenotoringController@index')->name('daftarMenotoring');
 Route::post('/admin/menotoring/{tbl_mejas}/edit', 'MejaController@update2')->name('updateMenotoring');
-

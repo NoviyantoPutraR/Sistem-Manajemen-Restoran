@@ -55,10 +55,10 @@
                                 <div class="form-group">
                                     <label for="statusMeja">Status</label>
                                     <select name="status" class="form-control" id="statusMeja">
-                                        <option value="NotAvailable"
-                                            {{ $meja->status == 'NotAvailable' ? 'selected' : '' }}>Not Available</option>
-                                        <option value="Available" {{ $meja->status == 'Available' ? 'selected' : '' }}>
-                                            Available</option>
+                                        <option value="tidak tersedia"
+                                            {{ $meja->status == 'tidak tersedia' ? 'selected' : '' }}>tidak tersedia</option>
+                                        <option value="tersedia" {{ $meja->status == 'tersedia' ? 'selected' : '' }}>
+                                        tersedia</option>
                                     </select>
                                 </div>
 

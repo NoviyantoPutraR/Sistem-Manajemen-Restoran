@@ -45,8 +45,6 @@ class MenuController extends Controller
             'menu' => 'required',
             'deskripsi' => 'required',
             'harga' => 'required',
-            'total_item' => 'required',
-            'total_transaksi' => 'required',
         ]);
 
         // Upload dan resize foto
@@ -73,8 +71,6 @@ class MenuController extends Controller
             'menu' => $validatedData['menu'],
             'deskripsi' => $validatedData['deskripsi'],
             'harga' => $validatedData['harga'],
-            'total_item' => $validatedData['total_item'],
-            'total_transaksi' => $validatedData['total_transaksi'],
         ]);
 
         $menu->save();
@@ -120,8 +116,6 @@ class MenuController extends Controller
             'menu' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'harga' => 'required',
-            'total_item' => 'required',
-            'total_transaksi' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -154,8 +148,6 @@ class MenuController extends Controller
         $menu->menu = $request->input('menu');
         $menu->deskripsi = $request->input('deskripsi');
         $menu->harga = $request->input('harga');
-        $menu->total_item = $request->input('total_item');
-        $menu->total_transaksi = $request->input('total_transaksi');
         $menu->save();
 
         return redirect(route('daftarMenu'))->with('success', 'Data Berhasil Diupdate');

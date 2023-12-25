@@ -55,8 +55,6 @@
                                     <th>Nama Menu</th>
                                     <th>Deskripsi</th>
                                     <th>Harga</th>
-                                    <th>Total Item</th>
-                                    <th>Total Transaksi</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -71,9 +69,6 @@
                                         <td>{{ $menu->deskripsi }}</td>
                                         {{-- <td>{{ $menu->harga }}</td> --}}
                                         <td>{{ number_format($menu->harga, 0, ',', '.') }}</td>
-                                        <td>{{ $menu->total_item }}</td>
-                                        {{-- <td>{{ $menu->total_transaksi }}</td> --}}
-                                        <td>{{ number_format($menu->total_transaksi, 0, ',', '.') }}</td>
                                         <td>
                                             <a href="{{ route('editMenu', ['id' => $menu->id]) }}"
                                                 class="btn btn-gradient-warning btn-sm" role="button">Edit</a>

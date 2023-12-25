@@ -1,14 +1,14 @@
 @extends('layouts.master')
 
 @section('addJavascript')
-    <script>
+<script>
         document.addEventListener('DOMContentLoaded', function () {
             // ... script JavaScript Anda ...
         });
 
         function updateTotal() {
-            var harga = parseFloat(document.getElementById('harga').value) || 0;
-            var totalItem = parseFloat(document.getElementById('txtTotalItem').value) || 0;
+            var harga = parseFloat(document.getElementById('harga').value)  0;
+            var totalItem = parseFloat(document.getElementById('txtTotalItem').value)  0;
 
             // Logika untuk menghitung total nominal berdasarkan harga dan total item
             var totalTransaksi = totalItem * harga;
@@ -93,15 +93,6 @@
                                 <div class="form-group">
                                     <label for="harga">Harga</label>
                                     <input type="number" name="harga" class="form-control" id="harga" placeholder="Masukkan harga" onchange="updateTotal()">
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtTotalItem">Total Item</label>
-                                    <input type="number" name="total_item" class="form-control" id="txtTotalItem" placeholder="Masukkan total item" onchange="updateTotal()">
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtTotalNominal">Total Transaksi</label>
-                                    <input type="text" name="total_transaksi" class="form-control" id="txtTotalNominal" readonly>
-                                    <input type="hidden" name="total_transaksi" id="totalNominal">
                                 </div>
 
                                 <button type="submit" class="btn btn-gradient-primary me-2">Simpan</button>

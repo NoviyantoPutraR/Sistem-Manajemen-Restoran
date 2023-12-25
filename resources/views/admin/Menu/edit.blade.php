@@ -7,8 +7,8 @@
         });
 
         function updateTotal() {
-            var harga = parseFloat(document.getElementById('harga').value) || 0;
-            var totalItem = parseFloat(document.getElementById('txtTotalItem').value) || 0;
+            var harga = parseFloat(document.getElementById('harga').value)  0;
+            var totalItem = parseFloat(document.getElementById('txtTotalItem').value)  0;
 
             // Logika untuk menghitung total nominal berdasarkan harga dan total item
             var totalTransaksi = totalItem * harga;
@@ -29,8 +29,7 @@
             var formatted = ribuan.join('.').split('').reverse().join('');
             return formatted;
         }
-    </script>
-
+        </script>
 @endsection
 
 @section('content')
@@ -86,15 +85,6 @@
                                     <input type="number" name="harga" class="form-control" id="harga" placeholder="Masukkan harga" value="{{ $menu->harga ?? '' }}" onchange="updateTotal()">
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="txtTotalItem">Total Item</label>
-                                    <input type="number" name="total_item" class="form-control" id="txtTotalItem" placeholder="Masukkan total item" value="{{ $menu->total_item ?? '' }}" onchange="updateTotal()">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="txtTotalNominal">Total Transaksi</label>
-                                    <input type="text" name="total_transaksi" class="form-control" id="txtTotalNominal" readonly value="{{ $menu->total_transaksi ?? '' }}">
-                                </div>
 
                                 <button type="submit" class="btn btn-gradient-primary me-2">Simpan</button>
                                 <a href="{{ route('daftarMenu') }}" class="btn btn-light">Batal</a>

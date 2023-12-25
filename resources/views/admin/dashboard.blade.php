@@ -2,72 +2,95 @@
 
 @section('addJavascript')
     <script>
-        const ctx = document.getElementById('myChart').getContext('2d');
+        var labels = [
+            @foreach ($grafikPengeluaran as $item)
+                '{{ date('F', mktime(0, 0, 0, $item->month, 1)) }}',
+            @endforeach
+        ];
 
-        async function fetchData() {
-            try {
-                const response = await fetch(
-                    'url_ke_endpoint_api_pengeluaran'); // Ganti dengan URL API atau endpoint yang sesuai
-                const data = await response.json();
+        var data = [
+            @foreach ($grafikPengeluaran as $item)
+                {{ $item->total_per_month }},
+            @endforeach
+        ];
 
-                // Memperbarui data chart dengan data yang diambil dari database
-                myChart.data.datasets[0].data = data.pengeluaran;
-                myChart.update(); // Mengupdate chart setelah data diubah
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
+        var backgroundColor = [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+        ];
 
-        new Chart(ctx, {
+        var borderColor = [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+        ];
+
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September',
-                    'Oktober', 'November', 'Desember'
-                ],
+                labels: labels,
                 datasets: [{
-                    label: '#Pengeluaran',
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                    ],
-                    data: [],
+                    label: 'Pengeluaran Per Bulan',
+                    data: data,
+                    backgroundColor: backgroundColor,
+                    borderColor: borderColor,
                     borderWidth: 1
                 }]
             },
             options: {
+                animation: {
+                    duration: 1000,
+                    easing: 'easeInOutQuad',
+                },
                 scales: {
-                    y: {
-                        beginAtZero: true
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                tooltips: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false,
+                },
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        boxWidth: 20,
+                        fontSize: 10,
+                        fontColor: 'black'
+                    },
+                    onClick: function(e, legendItem) {
+                        var index = legendItem.datasetIndex;
+                        var meta = myChart.getDatasetMeta(index);
+                        meta.hidden = meta.hidden === null ? !myChart.data.datasets[index].hidden : null;
+                        myChart.update();
                     }
                 }
             }
         });
-
-        async function fetchData() {
-            try {
-                const response = await fetch('url_ke_endpoint_api_pengeluaran');
-                const data = await response.json();
-
-                // Update chart data
-                myChart.data.datasets[0].data = data.pengeluaran;
-                myChart.update();
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
-
-        // Fetch data on page load
-        fetchData();
     </script>
 @endsection
 
@@ -90,8 +113,9 @@
                     </ul>
                 </nav>
             </div>
+
             <div class="row">
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+                <div class="col-4 grid-margin stretch-card">
                     <div class="card card-statistics">
                         <div class="card-body">
                             <div class="clearfix">
@@ -112,7 +136,7 @@
                     </div>
                 </div>
 
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+                <div class="col-4 grid-margin stretch-card">
                     <div class="card card-statistics">
                         <div class="card-body">
                             <div class="clearfix">
@@ -140,7 +164,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+                <div class="col-4 grid-margin stretch-card">
                     <div class="card card-statistics">
                         <div class="card-body">
                             <div class="clearfix">
@@ -163,16 +187,13 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
             <div class="row">
-                <div class="col-md-8 grid-margin stretch-card">
+                <div class="col-md-7 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
                             <div class="clearfix">
-                                <h4 class="card-title float-left">
+                                <h4 class="card-title float-center">
                                     Pengeluaran
                                 </h4>
                                 <div id="visit-sale-chart-legend"

@@ -3,50 +3,26 @@
 @section('addCss')
     <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sweetalert.min.css') }}">
+    <!-- Add this line to include Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <style>
         .card {
-            border: none;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .card:hover {
-            transform: scale(1.02);
+            height: 100%;
         }
 
         .card-body {
-            padding: 20px;
+            padding: 1rem;
         }
 
-        .card-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
+        .card-title,
         .card-text {
-            font-size: 16px;
-            margin-bottom: 15px;
+            margin-bottom: 0.5rem;
         }
 
-        .badge {
-            font-size: 14px;
-            padding: 8px;
-            border-radius: 4px;
-        }
-
-        .badge-danger {
-            background-color: #ff4d4d;
-            color: #fff;
-        }
-
-        .badge-success {
-            background-color: #4caf50;
-            color: #fff;
-        }
-
-        .btn-update-status {
-            margin-top: 10px;
+        .card-text .badge {
+            margin-right: 0.5rem;
         }
     </style>
 @endsection
@@ -115,13 +91,14 @@
                                 <p class="card-text">Kapasitas: {{ $meja->kapasitas }}</p>
                                 <p class="card-text">
                                     @if ($meja->status == 'tidak tersedia')
-                                        <span class="badge badge-danger">{{ $meja->status }}</span>
+                                        <span class="badge badge-danger"><i class="fas fa-chair"></i>
+                                            {{ $meja->status }}</span>
                                     @elseif ($meja->status == 'tersedia')
-                                        <span class="badge badge-success">{{ $meja->status }}</span>
+                                        <span class="badge badge-success"><i class="fas fa-chair"></i>
+                                            {{ $meja->status }}</span>
                                     @endif
                                 </p>
-                                <form class="update-form" method="POST"
-                                    data-meja-id="{{ $meja->id }}"
+                                <form class="update-form" method="POST" data-meja-id="{{ $meja->id }}"
                                     action="{{ route('updateMejam', ['id' => $meja->id]) }}">
                                     @csrf
                                     <input type="hidden" value="{{ $meja->id }}">
@@ -130,12 +107,10 @@
                                         <option value="tidak tersedia"
                                             {{ $meja->status == 'tidak tersedia' ? 'selected' : '' }}>
                                             tidak tersedia</option>
-                                        <option value="tersedia"
-                                            {{ $meja->status == 'tersedia' ? 'selected' : '' }}>
+                                        <option value="tersedia" {{ $meja->status == 'tersedia' ? 'selected' : '' }}>
                                             tersedia</option>
                                     </select>
-                                    <button type="submit"
-                                        class="btn btn-sm btn-primary btn-update-status">Update</button>
+                                    <button type="submit" class="btn btn-sm btn-primary btn-update-status">Update</button>
                                 </form>
                             </div>
                         </div>
@@ -146,6 +121,7 @@
                     </div>
                 @endforelse
             </div>
+
             {{-- End Cards --}}
         </div>
     </div>

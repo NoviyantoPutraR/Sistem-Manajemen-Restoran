@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\PembelianModel;
 use App\Pengeluaran;
+use App\Pesanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PengeluaranController extends Controller
 {
@@ -19,6 +22,36 @@ class PengeluaranController extends Controller
         return view('admin.pengeluaran.index', [
             'tbl_pengeluarans' => $tbl_pengeluarans
         ]);
+    }
+
+    public function laporan()
+    {
+        $totalNominalPesanans = Pesanan::select(DB::raw('SUM(total_nominal) as total_nominal'), DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month"))
+            ->groupBy('month')
+            ->get();
+
+        // Menghitung total nominal pengeluaran per bulan
+        $totalNominalPengeluarans = Pengeluaran::select(DB::raw('SUM(total) as total_nominal'), DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month"))
+            ->groupBy('month')
+            ->get();
+
+        // Menghitung total nominal pembelian per bulan
+        $totalNominalPembelians = PembelianModel::select(DB::raw('SUM(total_nominal) as total_nominal'), DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month"))
+            ->groupBy('month')
+            ->get();
+
+        // Menggabungkan data dari pembelian ke dalam $totalNominalPengeluarans
+        foreach ($totalNominalPembelians as $pembelian) {
+            $existingMonth = $totalNominalPengeluarans->firstWhere('month', $pembelian->month);
+
+            if ($existingMonth) {
+                $existingMonth->total_nominal += $pembelian->total_nominal;
+            } else {
+                $totalNominalPengeluarans->push($pembelian);
+            }
+        }
+
+        return view('admin.pengeluaran.laporan', compact('totalNominalPesanans', 'totalNominalPengeluarans', 'totalNominalPembelians'));
     }
 
     /**

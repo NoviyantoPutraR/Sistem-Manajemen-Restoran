@@ -88,6 +88,8 @@ class PesananController extends Controller
         return redirect()->route('pembayaranPesanan')->with('success', 'Pesanan berhasil ditambahkan dan lanjut Ke Pembayaran.');
     }
 
+
+
     /**
      * Display the specified resource.
      *
@@ -125,11 +127,11 @@ class PesananController extends Controller
     public function update(Request $request, Pesanan $pesanan)
     {
         $request->validate([
-            'status_pembayaran' => 'required|in:lunas,belum lunas',
+            'status_pesanan' => 'required|in:belum diproses,sedang diproses,selesai',
         ]);
 
         // $pesanan = Pesanan::findOrFail($pesanan);
-        $pesanan->status_pembayaran = $request['status_pembayaran'];
+        $pesanan->status_pesanan = $request['status_pesanan'];
         $pesanan->update(['status_pesanan' => $request->status_pesanan]);
 
         return redirect()->route('daftarPesanan')->with('success', 'Status Pesanan berhasil diperbarui');
@@ -142,6 +144,7 @@ class PesananController extends Controller
 
         // return response()->json(['message' => 'Status Pesanan diperbarui.']);
     }
+
 
     public function pembayaranedit(Request $request, Pesanan $pesanan)
     {

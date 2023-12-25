@@ -62,15 +62,11 @@ Route::post('/pembelian/{tbl_pembelians}/edit', 'PembelianController@update')->n
 Route::get('/pembelian/{tbl_pembelians}/delete', 'PembelianController@destroy')->name('deletePembelian');
 
 Route::middleware(['auth', 'manager'])->group(function () {
-    Route::get('/manager/dashboard', function () {
-        return view('manager.dashboard');
-    })->name('managerDashboard');
+    Route::get('/manager/dashboard', 'ManagerController@index')->name('managerDashboard');
 });
 
 Route::middleware(['auth', 'employee'])->group(function () {
-    Route::get('/employee/dashboard', function () {
-        return view('employee.dashboard');
-    })->name('employeeDashboard');
+    Route::get('/employee/dashboard', 'EmployeeController@index')->name('employeeDashboard');
 });
 
 

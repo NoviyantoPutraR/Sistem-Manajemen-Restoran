@@ -107,87 +107,69 @@
                 <nav aria-label="breadcrumb">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item active" aria-current="page">
-                            <span></span>Overview
-                            <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                            <span></span>Dashboard
+                            {{-- <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i> --}}
                         </li>
                     </ul>
                 </nav>
             </div>
 
             <div class="row">
-                <div class="col-4 grid-margin stretch-card">
-                    <div class="card card-statistics">
+                <div class="col-md-4 stretch-card grid-margin">
+                    <div class="card bg-gradient-danger card-img-holder text-white">
                         <div class="card-body">
-                            <div class="clearfix">
-                                <div class="float-start">
-                                    <i class="mdi mdi-account-multiple-plus text-danger icon-lg"></i>
-                                </div>
-                                <div class="float-end">
-                                    <p class="mb-0 text-right">Pengunjung</p>
-                                    <div class="fluid-container">
-                                        <h3 class="font-weight-medium text-right mb-0">
-                                            {{ $jumlahPengunjung ?? 'belum tersedia' }}
-                                        </h3>
-                                    </div>
-                                </div>
-
-                            </div>
+                            <img src="{{ asset('assets/images/dashboard/circle.svg') }}" class="card-img-absolute"
+                                alt="circle-image" />
+                            <h4 class="font-weight-normal mb-3">Pengunjung <i
+                                    class="mdi mdi-account-multiple-plus float-right"></i>
+                            </h4>
+                            <h2 class="font-weight-medium text-right mb-0">
+                                {{ $jumlahPengunjung ?? 'belum tersedia' }}</h2>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-4 grid-margin stretch-card">
-                    <div class="card card-statistics">
+                <div class="col-md-4 stretch-card grid-margin">
+                    <div class="card bg-gradient-info card-img-holder text-white">
                         <div class="card-body">
-                            <div class="clearfix">
-                                <div class="float-start">
-                                    <i class="mdi mdi-book-minus text-danger icon-lg"></i>
-                                </div>
-                                <div class="float-end">
-                                    <p class="mb-0 text-right">Pengeluaran</p>
-                                    <div class="fluid-container">
-                                        <h3 class="font-weight-medium text-right mb-0">
-                                            @php
-                                                $sumTotal = $totalPengeluaran + $totalPembelianBB;
-                                            @endphp
+                            <img src="{{ asset('assets/images/dashboard/circle.svg') }}" class="card-img-absolute"
+                                alt="circle-image" />
+                            <h4 class="font-weight-normal mb-3">Pengeluaran <i class="mdi mdi-book-minus float-right"></i>
+                            </h4>
+                            <h2 class="font-weight-medium text-right mb-0">
+                                @php
+                                    $sumTotal = $totalPengeluaran + $totalPembelianBB;
+                                @endphp
 
-                                            @isset($sumTotal)
-                                                Rp{{ number_format($sumTotal, 0, ',', '.') }}
-                                            @else
-                                                Data tidak tersedia
-                                            @endisset
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
+                                @isset($sumTotal)
+                                    Rp {{ number_format($sumTotal, 0, ',', '.') }}
+                                @else
+                                    Data tidak tersedia
+                                @endisset
+                            </h2>
+
                         </div>
                     </div>
                 </div>
-
-                <div class="col-4 grid-margin stretch-card">
-                    <div class="card card-statistics">
+                <div class="col-md-4 stretch-card grid-margin">
+                    <div class="card bg-gradient-success card-img-holder text-white">
                         <div class="card-body">
-                            <div class="clearfix">
-                                <div class="float-start">
-                                    <i class="mdi mdi-cash-usd text-danger icon-lg"></i>
-                                </div>
-                                <div class="float-end">
-                                    <p class="mb-0 text-right">Total Transaksi</p>
-                                    <div class="fluid-container">
-                                        <h4 class="font-weight-medium text-right mb-0">
-                                            @isset($totalTransaksi)
-                                                Rp{{ number_format($totalTransaksi, 0, ',', '.') }}
-                                            @else
-                                                Data tidak tersedia
-                                            @endisset
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
+                            <img src="{{ asset('assets/images/dashboard/circle.svg') }}" class="card-img-absolute"
+                                alt="circle-image" />
+                            <h4 class="font-weight-normal mb-3">Total Transaksi <i class="mdi mdi-cash-usd float-right"></i>
+                            </h4>
+                            <h2 class="font-weight-medium text-right mb-0">
+                                @isset($totalTransaksi)
+                                    Rp {{ number_format($totalTransaksi, 0, ',', '.') }}
+                                @else
+                                    Data tidak tersedia
+                                @endisset
+                            </h2>
+
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-md-7 grid-margin stretch-card">
                     <div class="card">

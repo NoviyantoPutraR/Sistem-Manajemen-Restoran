@@ -48,8 +48,8 @@
                                 <h2 class="text-purple font-weight-bold">SISTEM MANAJEMEN</h2>
                                 <h2 class="text-purple font-weight-bold">RESTORAN</h2>
                             </div>
-                            <h4>Halo! Mari memulai</h4>
-                            <h6 class="font-weight-light">Masuk untuk melanjutkan.</h6>
+                            <h4 class="text-center">LOGIN</h4>
+                            {{-- <h6 class="font-weight-light">Masuk untuk melanjutkan.</h6> --}}
                             <form class="pt-3" action="{{ route('login') }}" method="post">
                                 @csrf
                                 <div class="form-group">
@@ -93,11 +93,11 @@
                             </form>
                             <hr>
                             <div class="text-center">
-                                @if (Route::has('password.request'))
+                                {{-- @if (Route::has('password.request'))
                                     <p class="mb-2">
                                         <a href="{{ route('password.request') }}">Lupa Kata Sandi?</a>
                                     </p>
-                                @endif
+                                @endif --}}
                                 @if (Route::has('register'))
                                     <p class="mb-0">
                                         Belum punya akun? <a href="{{ route('register') }}" class="text-primary">Daftar

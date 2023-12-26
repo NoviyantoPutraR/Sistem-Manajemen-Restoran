@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('addJavascript')
+    <!-- //Grafik Pengeluaran -->
     <script>
         var labels = [
             @foreach ($grafikPengeluaran as $item)
@@ -92,7 +93,102 @@
             }
         });
     </script>
+
+<!-- Grafik Pemasukan -->
+<script>
+        var labels = [
+            @foreach ($grafikPemasukan as $item)
+                '{{ date('F', mktime(0, 0, 0, $item->month, 1)) }}',
+            @endforeach
+        ];
+
+        var data = [
+            @foreach ($grafikPemasukan as $item)
+                {{ $item->total_per_month }},
+            @endforeach
+        ];
+
+        var backgroundColor = [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+        ];
+
+        var borderColor = [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+        ];
+
+        var ctx1 = document.getElementById("myChart1").getContext('2d');
+        var myChart1 = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Pengeluaran Per Bulan',
+                    data: data,
+                    backgroundColor: backgroundColor,
+                    borderColor: borderColor,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                animation: {
+                    duration: 1000,
+                    easing: 'easeInOutQuad',
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                tooltips: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false,
+                },
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        boxWidth: 20,
+                        fontSize: 10,
+                        fontColor: 'black'
+                    },
+                    onClick: function(e, legendItem) {
+                        var index = legendItem.datasetIndex;
+                        var meta = myChart.getDatasetMeta(index);
+                        meta.hidden = meta.hidden === null ? !myChart.data.datasets[index].hidden : null;
+                        myChart.update();
+                    }
+                }
+            }
+        });
+    </script>
 @endsection
+
+
 
 @section('content')
     <div class="main-panel">
@@ -182,6 +278,23 @@
                                     class="rounded-legend legend-horizontal legend-top-right float-right"></div>
                             </div>
                             <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-7 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="clearfix">
+                                <h4 class="card-title float-center">
+                                    Pemasukan
+                                </h4>
+                                <div id="visit-sale-chart-legend"
+                                    class="rounded-legend legend-horizontal legend-top-right float-right"></div>
+                            </div>
+                            <canvas id="myChart1"></canvas>
                         </div>
                     </div>
                 </div>

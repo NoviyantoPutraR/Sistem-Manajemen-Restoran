@@ -44,8 +44,15 @@ class AdminController extends Controller
             ->groupBy(DB::raw('MONTH(tbl_pengeluarans.created_at)'))
             ->get();
 
+        $grafikPemasukan = DB::table('tbl_pesanans')
+            ->select(
+                DB::raw('MONTH(tbl_pesanans.created_at) as month'),
+                DB::raw('SUM(tbl_pesanans.total_nominal) as total_per_month')
+            )
+            ->groupBy(DB::raw('MONTH(tbl_pesanans.created_at)'))
+            ->get();
 
 
-        return view('admin.dashboard', compact('jumlahPengunjung', 'totalPengeluaran', 'totalTransaksi', 'totalPembelianBB', 'grafikPengeluaran'));
+        return view('admin.dashboard', compact('jumlahPengunjung', 'totalPengeluaran', 'totalTransaksi', 'totalPembelianBB', 'grafikPengeluaran', 'grafikPemasukan'));
     }
 }

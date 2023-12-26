@@ -144,7 +144,7 @@
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Pengeluaran Per Bulan',
+                    label: 'Pemasukan Per Bulan',
                     data: data,
                     backgroundColor: backgroundColor,
                     borderColor: borderColor,

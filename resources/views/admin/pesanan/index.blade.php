@@ -31,36 +31,20 @@
         }
     </script>
 
-    {{-- <!-- Pastikan jQuery sudah dimuat sebelum script ini -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
     <script>
-        $(document).ready(function() {
-            $('.btn-update-status').on('click', function() {
-                var form = $(this).closest('form');
-                var pesananId = form.data('pesanan-id');
-                var statusPesanan = form.find('.update-status').val();
+        document.addEventListener('DOMContentLoaded', function() {
+            $('.btn-pesanan-detail').on('click', function() {
+                const pesananId = $(this).data('pesanan-id');
+                const modalBody = $('#pesananDetailModalBody_' + pesananId);
+                modalBody.html($('#pesananDetailContent_' + pesananId).html());
+                $('#pesananDetailModal_' + pesananId).modal('show');
+            });
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/admin/Pesanan/' + pesananId + '/update', // Sesuaikan dengan route Anda
-                    data: {
-                        '_token': $('meta[name="csrf-token"]').attr('content'),
-                        'status_pesanan': statusPesanan
-                    },
-                    success: function(data) {
-                        // Update tampilan secara real-time jika perlu
-                        $('#pesanan_' + pesananId).find('.status_pesanan').text(statusPesanan);
-                        // Tambahkan kode lain sesuai kebutuhan
-                        console.log('Status Pesanan berhasil diperbarui');
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
+            $('[id^=pesananDetailModal]').on('hidden.bs.modal', function() {
+                $('[id^=pesananDetailModalBody]').html('');
             });
         });
-    </script> --}}
+    </script>
 @endsection
 
 @section('content')
@@ -103,11 +87,12 @@
                                             <th>Nama Pelanggan</th>
                                             <th>Status Pembayaran</th>
                                             <th>Status Pesanan</th>
-                                            <th>Menu Yg dipesan</th>
+                                            {{-- <th>Menu yang dipesan</th>
                                             <th>Meja</th>
-                                            <th>Total Yg dipesan</th>
-                                            <th>Total Pembayaran</th>
-                                            <th>Action</th>
+                                            <th>Total yang dipesan</th>
+                                            <th>Total Pembayaran</th> --}}
+                                            <th>Aksi</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -140,7 +125,7 @@
                                                             class="badge badge-success">{{ $pesanan->status_pesanan }}</span>
                                                     @endif
                                                 </td>
-                                                <td>
+                                                {{-- <td>
                                                     @foreach (json_decode($pesanan->menu_items) as $menuId)
                                                         {{ App\Menu::find($menuId)->menu }}
                                                         <br>
@@ -148,7 +133,7 @@
                                                 </td>
                                                 <td>{{ $pesanan->meja->no_meja }}</td>
                                                 <td>{{ $pesanan->total_items }}</td>
-                                                <td>{{ number_format($pesanan->total_nominal, 0, ',', '.') }}</td>
+                                                <td>{{ number_format($pesanan->total_nominal, 0, ',', '.') }}</td> --}}
                                                 <td>
                                                     <form class="update-form" method="POST"
                                                         data-pesanan-id="{{ $pesanan->id }}"
@@ -170,8 +155,14 @@
                                                                 Selesai</option>
                                                         </select>
                                                         <button type="submit"
-                                                            class="btn btn-sm btn-primary btn-update-status">Update</button>
+                                                            class="btn btn-sm btn-primary btn-update-status">Perbarui</button>
                                                     </form>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-primary btn-pesanan-detail"
+                                                        data-pesanan-id="{{ $pesanan->id }}">
+                                                        Detail Pesanan
+                                                    </button>
                                                 </td>
                                                 </td>
                                             </tr>
@@ -187,6 +178,62 @@
                     </div>
                 </div>
             </div>
+            @foreach ($pesanans as $pesanan)
+                <div class="modal fade" id="pesananDetailModal_{{ $pesanan->id }}" tabindex="-1"
+                    aria-labelledby="pesananDetailModalLabel_{{ $pesanan->id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="pesananDetailModalLabel_{{ $pesanan->id }}">
+                                    Detail Pesanan</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="pesananDetailModalBody_{{ $pesanan->id }}">
+                                <!-- Content of the modal directly rendered using Blade template -->
+                                <h5>Kode Invoice :{{ $pesanan->kode_invoice }}</h5>
+                                <p>Nama Pelanggan :{{ $pesanan->nama_pelanggan }}</p>
+                                <p>Status Pembayaran :{{ $pesanan->status_pembayaran }}</p>
+                                <p>Status Pesanan :{{ $pesanan->status_pesanan }}</p>
+
+                                <p>Menu yang dipesan :</p>
+                                <ul>
+                                    @foreach (json_decode($pesanan->menu_items) as $menuId)
+                                        <li>{{ App\Menu::find($menuId)->menu }}</li>
+                                    @endforeach
+                                </ul>
+
+                                <p>Meja :{{ $pesanan->meja->no_meja }}</p>
+                                <p>Total yang dipesan :{{ $pesanan->total_items }}</p>
+                                <p>Total Pembayaran :{{ number_format($pesanan->total_nominal, 0, ',', '.') }}</p>
+                                <!-- ... (other details) ... -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+            @foreach ($pesanans as $pesanan)
+                <div id="pesananDetailContent_{{ $pesanan->id }}" style="display: none;">
+                    <h5>Kode Invoice : {{ $pesanan->kode_invoice }}</h5>
+                    <p>Nama Pelanggan : {{ $pesanan->nama_pelanggan }}</p>
+                    <p>Status Pembayaran : {{ $pesanan->status_pembayaran }}</p>
+                    <p>Status Pesanan : {{ $pesanan->status_pesanan }}</p>
+
+                    <p>Menu yang dipesan :</p>
+                    <ul>
+                        @foreach (json_decode($pesanan->menu_items) as $menuId)
+                            <li>{{ App\Menu::find($menuId)->menu }}</li>
+                        @endforeach
+                    </ul>
+
+                    <p>Meja : {{ $pesanan->meja->no_meja }}</p>
+                    <p>Total yang dipesan : {{ $pesanan->total_items }}</p>
+                    <p>Total Pembayaran : {{ number_format($pesanan->total_nominal, 0, ',', '.') }}</p>
+                    <!-- ... (other details) ... -->
+                </div>
+            @endforeach
             {{-- table --}}
         </div>
     </div>

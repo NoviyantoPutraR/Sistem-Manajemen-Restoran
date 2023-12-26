@@ -31,7 +31,7 @@
 @endsection
 
 @section('content')
-<div class="main-panel">
+    <div class="main-panel">
         <div class="content-wrapper">
             {{-- content header --}}
             <div class="page-header">
@@ -53,43 +53,46 @@
                 </nav>
             </div>
 
-        <div class="card">
-            <div class="card-body">
-                <a href="{{ route('daftarUser') }}" class="btn btn-outline-info btn-fw" style="margin-bottom: 10px;" role="button">Tambah Menu</a>
-                
-                <div class="table-responsive">
-                    <table class="table table-hover" id="data-table">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>User</th>
-                                <th>Email</th>
-                                <th>Type</th>
-                                <th>Last Login</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($tbl_users as $tbl_user)
-                                <tr>                                
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $tbl_user->name }}</td>
-                                    <td>{{ $tbl_user->email }}</td>
-                                    <td>{{ $tbl_user->role }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($tbl_user->created_at)->setTimezone('Asia/Jakarta')->translatedFormat('j M Y') }}</td>
-                                    <td>
-                                        <a href="{{ route('editUser', ['id' => $tbl_user->id]) }}" class="btn btn-gradient-warning btn-sm" role="button">Edit</a>
-                                        <a onclick="confirmDelete(this)" 
-                                            data-url="{{ route('deleteUser', ['id' => $tbl_user->id])}}" 
-                                            class="btn btn-gradient-danger btn-sm" role="button">Hapus</a>
-                                    </td>
+            <div class="card">
+                <div class="card-body">
+                    <a href="{{ route('addUser') }}" class="btn btn-outline-info btn-fw" style="margin-bottom: 10px;"
+                        role="button">Tambah User</a>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>User</th>
+                                    <th>Email</th>
+                                    <th>Type</th>
+                                    <th>Last Login</th>
+                                    <th>Aksi</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($tbl_users as $tbl_user)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $tbl_user->name }}</td>
+                                        <td>{{ $tbl_user->email }}</td>
+                                        <td>{{ $tbl_user->role }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($tbl_user->created_at)->setTimezone('Asia/Jakarta')->translatedFormat('j M Y') }}
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('editUser', ['id' => $tbl_user->id]) }}"
+                                                class="btn btn-gradient-warning btn-sm" role="button">Edit</a>
+                                            <a onclick="confirmDelete(this)"
+                                                data-url="{{ route('deleteUser', ['id' => $tbl_user->id]) }}"
+                                                class="btn btn-gradient-danger btn-sm" role="button">Hapus</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

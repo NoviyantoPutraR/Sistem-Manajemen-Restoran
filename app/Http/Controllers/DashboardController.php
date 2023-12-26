@@ -46,9 +46,8 @@ class DashboardController extends Controller
 
 
 
-            return view('dashboard', compact('jumlahPengunjung', 'totalPengeluaran', 'totalTransaksi', 'totalPembelianBB', 'grafikPengeluaran'));
+        return view('dashboard', compact('jumlahPengunjung', 'totalPengeluaran', 'totalTransaksi', 'totalPembelianBB'));
 
 
     }
-
 }

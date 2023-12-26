@@ -29,18 +29,24 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $jumlahPengunjung = Pelanggan::count();
+        $jumlahPengunjung = Pesanan::count();
         $totalPengeluaran = Pengeluaran::sum('total');
         $totalTransaksi = Pesanan::sum('total_nominal');
         $totalPembelianBB = PembelianModel::sum('total_nominal');
         $grafikPengeluaran = DB::table('tbl_pengeluarans')
-        ->select(DB::raw('SUM(total) as total_per_month'), DB::raw('MONTH(created_at) as month'))
-        ->groupBy(DB::raw('MONTH(created_at)'))
-        ->get();
+            ->select(
+                DB::raw('MONTH(tbl_pengeluarans.created_at) as month'),
+                DB::raw('SUM(tbl_pengeluarans.total) + IFNULL(SUM(tbl_pembelians.total_nominal), 0) as total_per_month')
+            )
+            ->leftJoin('tbl_pembelians', function ($join) {
+                $join->on(DB::raw('MONTH(tbl_pengeluarans.created_at)'), '=', DB::raw('MONTH(tbl_pembelians.created_at)'));
+            })
+            ->groupBy(DB::raw('MONTH(tbl_pengeluarans.created_at)'))
+            ->get();
 
 
 
-        return view('dashboard', compact('jumlahPengunjung', 'totalPengeluaran', 'totalTransaksi', 'totalPembelianBB'));
+            return view('dashboard', compact('jumlahPengunjung', 'totalPengeluaran', 'totalTransaksi', 'totalPembelianBB', 'grafikPengeluaran'));
 
 
     }

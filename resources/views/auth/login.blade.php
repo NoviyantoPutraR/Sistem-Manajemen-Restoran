@@ -45,8 +45,8 @@
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5">
                             <div class="brand-logo text-center">
-                                <h2 class="text-purple font-weight-bold">SISTEM MANAJEMEN</h2>
-                                <h2 class="text-purple font-weight-bold">RESTORAN</h2>
+                            <i class="mdi mdi-chef-hat text-purple"></i>
+                                <h2 class="text-purple font-weight-bold">GAMELAB RESTO</h2>
                             </div>
                             <h4>Halo! Mari memulai</h4>
                             <h6 class="font-weight-light">Masuk untuk melanjutkan.</h6>
